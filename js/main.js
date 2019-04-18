@@ -74,4 +74,5 @@ const setTitleClass = (array, firstSearch, secondSearch, className) => {
   }
 };
 
-setTitleClass(titles, 'Mars', 'Martian', '.news__item--from-mars');
+setTitleClass(titles, 'Mars', 'Martian', 'news__item--from-mars');
+
