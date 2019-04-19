@@ -1,6 +1,8 @@
 'use strict';
 
 const news = document.querySelector('.news');
+// const palette = document.querySelector('.palette');
+const paletteSpaceShip = document.querySelector('.palette-space-ship');
 
 const data = [
   {
@@ -72,7 +74,6 @@ const fetchNews = () => {
   fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/news.json')
     .then(response => response.json())
     .then(data => {
-      console.log(data);
       paintNews(data.news);
       martianNews();
     });
@@ -83,3 +84,44 @@ fetchNews();
 const showPic = () => {
   event.currentTarget.classList.toggle('news__item--no-image-visible');
 };
+
+const paintPalette = (colors) => {
+  // creo elementos
+  const titlePalette = document.createElement('h2');
+  const listColors = document.createElement('ul');
+
+  //creo contenidos
+  const titlePaletteContent = document.createTextNode('Space Ship');
+
+  //agrego contenido a elementos
+  titlePalette.appendChild(titlePaletteContent);
+
+  //agrego clase a la lista para añadirle estilos después
+  listColors.classList.add('space-ship-colors');
+
+  //agrego elementos a elementos
+  paletteSpaceShip.appendChild(titlePalette);
+  paletteSpaceShip.appendChild(listColors);
+
+  //agrego li a ul mediante un bucle
+  for (const color of colors) {
+    const listColor = document.createElement('li');
+    listColor.classList.add('color__item');
+    listColor.setAttribute('style', `background-color:#${color}`);
+    listColors.appendChild(listColor);
+  }
+}
+
+const getColors = () => {
+  fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palette.json')
+    .then(response => response.json())
+    .then(data => {
+      const palettes = data.palettes;
+      const color = palettes[0].colors;
+      console.log(palettes);
+      console.log(palettes[0].colors);
+      paintPalette(color);
+    });
+};
+
+getColors();

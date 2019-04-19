@@ -1,7 +1,10 @@
 body {
   background: #fffdfa;
   color: #332100;
-  margin: 0;
+}
+
+h1 {
+  text-align: center;
 }
 
 .news {
@@ -44,4 +47,16 @@ body {
 
 .news__item--no-image-visible .news__image {
   display: none;
+}
+
+.space-ship-colors {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.color__item {
+  height: 100px;
+  width: 100px;
 }
