@@ -1,6 +1,6 @@
 'use strict';
 
-const data = [
+/*const data = [
   {
     title: 'Asteroids 101',
     image: 'https://via.placeholder.com/200x100'
@@ -60,4 +60,32 @@ for (const martians of arr_title) {
     martians.classList.add('news__item--from-mars');
   }
 
-}
+}*/
+
+//ejercicio3
+
+const container_list = document.querySelector('.news');
+
+fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/news.json')
+  .then(response => response.json())
+  .then(data => {
+    for (const arr of data.news) {
+      const item_list = document.createElement('li');
+      item_list.classList.add('news__item');
+      const item_h2 = document.createElement('h2');
+      item_h2.classList.add('news__title');
+      const item_img = document.createElement('img');
+      item_img.classList.add('news__image');
+
+      const itemCont_h2 = document.createTextNode(arr.title);
+      item_h2.appendChild(itemCont_h2);
+
+      item_img.src = arr.image;
+      item_img.alt = arr.title;
+
+      item_list.appendChild(item_h2);
+      item_list.appendChild(item_img);
+
+      container_list.appendChild(item_list);
+    }
+  })
