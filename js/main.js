@@ -42,15 +42,16 @@ for (const item of data) {
   list.appendChild(listItem);
 }
 //-----------------------EJERCICIO 2
-const martians = document.querySelectorAll('.news__item, .news__title');
+const martians = document.querySelectorAll('.news__item');
 
 for (let i = 0; i < martians.length; i++) {
   const martiansItems = martians[i];
 
-  if(martiansItems.classList.contains('news__item') && martiansItems.innerHTML.includes('Mars')) {
+  if(martiansItems.innerHTML.includes('Mars')) {
     martiansItems.classList.add('news__item--from-mars');
-  } else if(martiansItems.classList.contains('news__item') && martiansItems.innerHTML.includes('Martians')) {
+  } else if(martiansItems.innerHTML.includes('Martians')) {
     martiansItems.classList.add('news__item--from-mars');}
 }
 
+//---------------EJERCICIO 3  
 
