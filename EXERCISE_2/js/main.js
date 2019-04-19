@@ -52,18 +52,24 @@ const createNewsInDOM = arrayOfObjects => {
   return arrOfNews;
 }
 
-const titlesFinder = arrayOfEls => {
+const martianClassAddition = arrayOfEls => {
   for (let i = 0; i < arrayOfEls.length; i++) {
     let resultTitles = arrayOfEls[i].firstChild.innerHTML;
     console.log(resultTitles);
+
+    if (resultTitles.includes('Mars')) {
+      arrayOfEls[i].classList.add('news__item--from-mars');
+    } else if (resultTitles.includes('Martian')) {
+      arrayOfEls[i].classList.add('news__item--from-mars');
+    }
   }
 }
 
 //Create DOM
 const resultArr = createNewsInDOM(data);
 
-//See titles of each li element (and save titles in variables?)
-titlesFinder(resultArr);
-
 //Look for word "mars" or "martian" in titles and put new class 'news__item--from-mars' on parents of titles (li elements)
-// martianClassAddition();
+martianClassAddition(resultArr);
+
+
+
