@@ -47,10 +47,23 @@ const paintNews = (array) => {
    //meto elementos dentro de otros
    newLi.appendChild(newTitle);
    newLi.appendChild(newImg);
-   
+
    //añado elementos a la página
    news.appendChild(newLi);
  }
 }
 
 paintNews(data);
+
+
+const martianNews = () => {
+  const allNews = document.querySelectorAll('.news__item');
+  for (const item of allNews) {
+    const titleContent = item.querySelector('.news__title').innerHTML;
+    if (titleContent.includes('Mars') || titleContent.includes('Martian')) {
+      item.classList.add('news__item--from-mars'); 
+    }
+  }
+}
+
+martianNews();
