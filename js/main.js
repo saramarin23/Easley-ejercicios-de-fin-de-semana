@@ -38,7 +38,7 @@ function fetchData (url) {
 
     for (let i = 0; i < data.length; i++) {
       const newItem = document.createElement ('li');
-      newItem.setAttribute ('class', 'news__item');
+      newItem.setAttribute ('class', 'news__item news__item--no-image-visible');
 
       const newTitle = document.createElement ('h2');
       const newText = document.createTextNode (data[i].title);
@@ -52,19 +52,24 @@ function fetchData (url) {
 
       newItem.appendChild (newTitle);
       newItem.appendChild (newImage);
+      newItem.addEventListener ('click', toggleClass);
       newsList.appendChild (newItem);
 
-      //Añade clase a los elementos que contengan Martian o Mars.
-      const titles = document.querySelectorAll ('.news__title');
-      for (let i = 0; i < titles.length; i++) {
-        const titlesText = titles[i].innerHTML;
-        if (
-          titlesText.includes ('Martian') ||
-          titlesText.includes ('Mars')
-        ) {
-          titles[i].parentElement.setAttribute ('class', 'news__item--from-mars');
-        }
+    }
+
+    //Añade clase a los elementos que contengan Martian o Mars.
+    const titles = document.querySelectorAll ('.news__title');
+    for (let i = 0; i < titles.length; i++) {
+      const titlesText = titles[i].innerHTML;
+      if (titlesText.includes ('Martian') || titlesText.includes ('Mars')) {
+        titles[i].parentElement.classList.add ('news__item--from-mars');
       }
+    }
+
+    //Quita las imagenes
+    function toggleClass (event) {
+      const trigger = event.currentTarget;
+      trigger.classList.toggle('news__item--no-image-visible');
     }
   });
 }
