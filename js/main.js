@@ -39,32 +39,66 @@ const ulEl = document.querySelector('.news');
 
 //Añadir contenido usando DOM avanzado
 
-for (const news of data) {
-  const newLi = document.createElement('li');
-  const newH2 = document.createElement('h2');
-  const newImg = document.createElement('img');
-  const title = document.createTextNode (news.title);
-  newH2.appendChild(title);
-  newH2.classList.add('news__title');
-  newImg.classList.add('news__image');
-  newLi.classList.add('news__item');
-  newImg.src = news.image;
-  newImg.alt = news.title;
-  newLi.appendChild(newH2);
-  newLi.appendChild(newImg);
-  ulEl.appendChild(newLi);
-}
+// for (const news of data) {
+//   const newLi = document.createElement('li');
+//   const newH2 = document.createElement('h2');
+//   const newImg = document.createElement('img');
+//   const title = document.createTextNode (news.title);
+//   newH2.appendChild(title);
+//   newH2.classList.add('news__title');
+//   newImg.classList.add('news__image');
+//   newLi.classList.add('news__item');
+//   newImg.src = news.image;
+//   newImg.alt = news.title;
+//   newLi.appendChild(newH2);
+//   newLi.appendChild(newImg);
+//   ulEl.appendChild(newLi);
+// }
 
 
-//EJERCICIO 2
+// EJERCICIO 2
 
-const newsEl = document.querySelectorAll('.news__item');
+// const newsEl = document.querySelectorAll('.news__item');
 
-for (const news of newsEl) {
-  const titleEl = news.querySelector('h2').innerHTML;
-  const containsMars = titleEl.includes('Mars');
-  const containsMartians = titleEl.includes('Martians');
-  if (containsMars || containsMartians) {
-    news.classList.add('news__item--from-mars');
-  }
-}
+// for (const news of newsEl) {
+//   const titleEl = news.querySelector('h2').innerHTML;
+//   const containsMars = titleEl.includes('Mars');
+//   const containsMartians = titleEl.includes('Martians');
+//   if (containsMars || containsMartians) {
+//     news.classList.add('news__item--from-mars');
+//   }
+// }
+
+
+//Ejercicio 3
+
+fetch ('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/news.json')
+  .then(response => response.json())
+  .then(function (data){
+    const {news:allNews} = data;
+    for (const news of allNews) {
+      const newLi = document.createElement('li');
+      const newH2 = document.createElement('h2');
+      const newImg = document.createElement('img');
+      const title = document.createTextNode (news.title);
+      newH2.appendChild(title);
+      newH2.classList.add('news__title');
+      newImg.classList.add('news__image');
+      newLi.classList.add('news__item');
+      newImg.src = news.image;
+      newImg.alt = news.title;
+      newLi.appendChild(newH2);
+      newLi.appendChild(newImg);
+      ulEl.appendChild(newLi);
+    }
+    const newsEl = document.querySelectorAll('.news__item');
+    for (const news of newsEl) {
+      const titleEl = news.querySelector('h2').innerHTML;
+      const containsMars = titleEl.includes('Mars');
+      const containsMartians = titleEl.includes('Martians');
+      if (containsMars || containsMartians) {
+        news.classList.add('news__item--from-mars');
+      }
+    }
+  });
+
