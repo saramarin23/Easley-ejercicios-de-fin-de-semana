@@ -51,3 +51,12 @@ body {
   width: 100px;
   display: inline-block;
 }
+
+.selected {
+  border: 2px solid lightgreen;
+  box-sizing: border-box;
+}
+
+.palette {
+  list-style: none;
+}

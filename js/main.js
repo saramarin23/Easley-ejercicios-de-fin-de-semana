@@ -132,7 +132,7 @@ fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-sema
 
   //ejercicio6
 
-  const container = document.querySelector('.container');
+  const list = document.querySelector('.container');
 
   fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palettes.json')
     .then(res=>res.json())
@@ -145,18 +145,19 @@ fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-sema
         origin.classList.add('origin');
         const colors = document.createElement('div');
         colors.classList.add('color');
+        const palette = document.createElement('li');
+        palette.classList.add('palette');
 
         const title_cont = document.createTextNode(`Nombre de la nave: ${arr_palettes.name}`);
         const origin_cont = document.createTextNode(`Serie: ${arr_palettes.from}`);
         
         title.appendChild(title_cont);
         origin.appendChild(origin_cont);
-        container.appendChild(title);
-        container.appendChild(origin);
+        palette.appendChild(title);
+        palette.appendChild(origin);
         
         const color_container = document.createElement('div');
         color_container.classList.add('color_container');
-        container.appendChild(color_container);
 
         for (const colors of arr_palettes.colors) {
           
@@ -165,6 +166,18 @@ fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-sema
           item.setAttribute('style', `background-color: #${colors}`);
           color_container.appendChild(item);
         }
-      
+
+        palette.appendChild(color_container);
+        list.appendChild(palette);
+
+//ejercicio7
+
+        const selectPalette = () => {
+            palette.classList.toggle('selected');
+        }
+
+        palette.addEventListener('click', selectPalette);
       }
     })
+
+    
