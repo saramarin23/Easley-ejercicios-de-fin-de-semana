@@ -1,37 +1,43 @@
 "use strict";
 
-//ex05
-
+//ex06
 function colorPalette() {
-  const ulPalette = document.querySelector(".color-palette");
-
   fetch(
-    `https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palette.json`
+    `https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palettes.json`
   )
     .then(function(response) {
       return response.json();
     })
     .then(function(data) {
       const listPalette = Object.keys(data.palettes);
-      const everyPalette = data.palettes[0];
 
-      const newTitle = document.createElement("h2");
-      const newTitleInner = document.createTextNode(everyPalette.name);
-     
-      newTitle.appendChild(newTitleInner);
-      ulPalette.appendChild(newTitle);
- 
+      for (let i = 0; i < listPalette.length; i++) {
+        const everyPalette = data.palettes[i];
+        const ulPalette = document.querySelector(".color-palette");
 
-      for (let color of listPalette) {
-        const allColors = data.palettes[color];
+        let newUl = document.createElement("ul");
+
+        const newTitle = document.createElement("h2");
+        const newTitleInner = document.createTextNode(everyPalette.name);
+
+        const newFrom = document.createElement("h3");
+        const newFromInner = document.createTextNode(everyPalette.from);
+
+        newTitle.appendChild(newTitleInner);
+        newFrom.appendChild(newFromInner);
+        ulPalette.append(newUl);
+
+        const allColors = data.palettes[i];
         const everyColor = allColors.colors;
 
-        for (let i = 0; i < everyColor.length; i++) {
+        newUl.append(newTitle, newFrom);
+
+        for (let y = 0; y < everyColor.length; y++) {
           let newLi = document.createElement("li");
-          let bgColor = everyColor[i];
+          let bgColor = everyColor[y];
 
           newLi.classList.add("color__item");
-          ulPalette.appendChild(newLi);
+          newUl.appendChild(newLi);
 
           newLi.style.background = `${bgColor}`;
           newLi.setAttribute("style", `background-color:#${bgColor}`);
