@@ -60,7 +60,7 @@ for (const martians of arr_title) {
     martians.classList.add('news__item--from-mars');
   }
 
-}*/
+}
 
 //ejercicio3
 
@@ -87,5 +87,21 @@ fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-sema
       item_list.appendChild(item_img);
 
       container_list.appendChild(item_list);
+
+//ejercicio4
+
+      item_list.classList.add('news__item--no-image-visible');
+      console.log(item_list);
+
+      function noImage() {
+        item_list.classList.toggle('news__item--no-image-visible');
+      }
+
+      item_list.addEventListener('click', noImage);
     }
-  })
+  })*/
+
+
+//ejercicio5
+
+  
