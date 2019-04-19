@@ -24,7 +24,6 @@ const data = [
 ];
 
 function createLi() {
-
   for (const obj of data) {
     const news = document.querySelector('.news');
     const newItem = document.createElement('li');
@@ -42,5 +41,13 @@ function createLi() {
     news.appendChild(newItem);
   }
 }
-
 createLi();
+
+const allNews = document.querySelectorAll('.news__item');
+for (let i = 0; i < allNews.length; i ++) {
+  const allTitles = allNews[i].firstChild;
+  const titleContent = allTitles.innerHTML;
+  if (titleContent.includes('Mars') || titleContent.includes('Martian')) {
+    allNews[i].classList.add('news__item--from-mars');
+  }
+}
