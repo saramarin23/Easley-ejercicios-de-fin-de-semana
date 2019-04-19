@@ -24,6 +24,8 @@ const data = [
   }
 ];
 
+// EJERCICIO 01
+
 //Get elements
 const newsList = document.querySelector(".news");
 
@@ -54,3 +56,26 @@ for (const news of data) {
   //Append each item to the main list
   newsList.appendChild(newItemEl);
 }
+
+// EJERCICIO 02
+//Get all li elements (array)
+const itemsArr = document.querySelectorAll('.news__item');
+
+//Iterate over the array
+for (const myItem of itemsArr){
+  //Aply class '.news__item--from-mars' to li if matching a condition: its title contains "Mars" or "Martian"
+
+  //Get title content
+  // const titleEl = myItem.childNodes[0];
+  const titleEl = myItem.querySelector('.news__title');
+  const titleContent = titleEl.innerHTML;
+
+  // Conditions that will return a true/false
+  const containsMars = titleContent.includes("Mars");
+  const containsMartian = titleContent.includes("Martian");
+
+  if(containsMars || containsMartian){
+    myItem.classList.add('news__item--from-mars');
+  }
+}
+
