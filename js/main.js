@@ -19,11 +19,12 @@ function listNews() {
         //accedemos a cada objeto del array news
         const everyObj = data.news[list];
 
-        const newItem = document.createElement("li");
+        let newItem = document.createElement("li");
         const newItemTitle = document.createElement("h2");
         const newItemImg = document.createElement("img");
 
-        newItem.classList.add("news__item");
+        //2 classes at the same time
+        newItem.classList.add("news__item", "news__item--no-image-visible", "heightDefault");
         newItemTitle.classList.add("news__title");
         newItemImg.classList.add("news__image");
 
@@ -32,6 +33,14 @@ function listNews() {
 
         newItem.append(newItemTitle, newItemImg);
         listNew.appendChild(newItem);
+
+        //ex04
+        function handleLiClick(event) {
+          newItem = event.currentTarget;
+          this.classList.toggle("news__item--no-image-visible");
+          this.classList.toggle("heightDefault");
+        }
+        newItem.addEventListener("click", handleLiClick);
       }
     });
 }
