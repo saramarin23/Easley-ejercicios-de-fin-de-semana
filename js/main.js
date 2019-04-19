@@ -24,6 +24,7 @@ const data = [
 ];
 
 const listEl = document.querySelector('.news');
+function addHtml(){
 for (const news of data){
   const newsItem = document.createElement('ĺi');
   const newsTitle = document.createElement('h2');
@@ -40,3 +41,15 @@ for (const news of data){
   newsTitle.appendChild(newsTitleContent);
 
 }
+}
+function addTitleStyles(){
+  const titlesList = document.querySelectorAll('.news__item');
+  for (const titleEl of titlesList){
+    const title =titleEl.querySelector('.news__title').innerHTML;
+    if (title.includes('Mars') || title.includes('Martian')){
+      titleEl.classList.add('news__item--from-mars');
+    }
+  }
+}
+addHtml();
+addTitleStyles();
