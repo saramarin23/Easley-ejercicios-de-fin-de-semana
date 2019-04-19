@@ -28,19 +28,3 @@ const printPalette = () => {
 };
 
 printPalette();
-
-// {
-//   "version": "v0.0.0",
-//   "palettes": [
-//     {
-//       "name": "Space Ship 1",
-//       "colors": [
-//         "FFBF2E",
-//         "E85E0C",
-//         "FF0000",
-//         "C70CE8",
-//         "330DFF"
-//       ]
-//     }
-//   ]
-// }
