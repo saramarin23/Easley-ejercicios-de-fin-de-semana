@@ -25,7 +25,7 @@ const data = [
 
 const ulEl = document.querySelector('.news');
 
-
+//EJERCICIO 1
 //Añadir contenido usando innerHTML
 
 // for (const news of data) {
@@ -55,3 +55,16 @@ for (const news of data) {
   ulEl.appendChild(newLi);
 }
 
+
+//EJERCICIO 2
+
+const newsEl = document.querySelectorAll('.news__item');
+
+for (const news of newsEl) {
+  const titleEl = news.querySelector('h2').innerHTML;
+  const containsMars = titleEl.includes('Mars');
+  const containsMartians = titleEl.includes('Martians');
+  if (containsMars || containsMartians) {
+    news.classList.add('news__item--from-mars');
+  }
+}
