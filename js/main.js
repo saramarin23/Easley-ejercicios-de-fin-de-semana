@@ -56,7 +56,7 @@
 //---------------EJERCICIO 3
 const api =
   'https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/news.json';
-  
+
 fetch(api)
   .then(response => response.json())
   .then(data => {
@@ -68,7 +68,8 @@ fetch(api)
       const image = item.image;
 
       const title = document.createTextNode(item.title);
-      listItem.setAttribute('class', 'news__item');
+      // listItem.setAttribute('class', 'news__item');
+      listItem.setAttribute('class', 'news__item--no-image-visible');
       h2.setAttribute('class', 'news__title');
       img.setAttribute('class', 'news__image');
       img.setAttribute('src', `${image}`);
@@ -77,5 +78,18 @@ fetch(api)
       listItem.appendChild(h2);
       listItem.appendChild(img);
       list.appendChild(listItem);
+//----------------------- EJERCICIO 4
+      const showImages = e => {
+        console.log(e.currentTarget);
+        const trigger = e.currentTarget.parentElement;
+        console.log(trigger);
+        // const triggerPE = trigger.parentElement;
+        if (trigger.classList.contains('news__item--no-image-visible')) {
+          trigger.classList.remove('news__item--no-image-visible');
+        } else {
+          trigger.classList.add('news__item--no-image-visible');
+        }
+      };
+      h2.addEventListener('click', showImages);
     }
   });
