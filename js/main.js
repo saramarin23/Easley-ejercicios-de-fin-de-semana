@@ -1,65 +1,38 @@
 "use strict";
 
-const data = [
-  {
-    title: "Asteroids 101",
-    image: "https://via.placeholder.com/200x100"
-  },
-  {
-    title: "Life on Mars",
-    image: "https://via.placeholder.com/200x100"
-  },
-  {
-    title: "Martians invade Earth",
-    image: "https://via.placeholder.com/200x100"
-  },
-  {
-    title: "Humans aren't real",
-    image: "https://via.placeholder.com/200x100"
-  },
-  {
-    title: "Space The Final Frontier",
-    image: "https://via.placeholder.com/200x100"
-  }
-];
+//ex03
 
-//ex01
 function listNews() {
   const listNew = document.querySelector(".news");
-  const listData = Object.keys(data);
 
-  //recorremos el objeto data
-  for (let list of listData) {
-    let eachObj = data[list];
+  fetch(
+    `https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/news.json`
+  )
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(data) {
+      //accedemos al objeto y cuantos arrays tiene
+      const listData = Object.keys(data.news);
 
-    const newItem = document.createElement("li");
-    const newTitleContent = document.createElement("h2");
-    const imgItem = document.createElement("img");
+      for (let list of listData) {
+        //accedemos a cada objeto del array news
+        const everyObj = data.news[list];
 
-    newItem.classList.add("news__item");
-    newTitleContent.classList.add("news__title");
-    imgItem.classList.add("news__image");
+        const newItem = document.createElement("li");
+        const newItemTitle = document.createElement("h2");
+        const newItemImg = document.createElement("img");
 
-    imgItem.src = eachObj.image;
-    imgItem.title = eachObj.title;
+        newItem.classList.add("news__item");
+        newItemTitle.classList.add("news__title");
+        newItemImg.classList.add("news__image");
 
-    newItem.appendChild(newTitleContent);
-    newItem.appendChild(imgItem);
-    newTitleContent.innerHTML = eachObj.title;
+        newItemTitle.innerHTML = newItemImg.title = everyObj.title;
+        newItemImg.src = everyObj.image;
 
-    listNew.appendChild(newItem);
-  }
-
-  //ex02
-  const allLi = document.querySelectorAll(".news__item");
-  const allLiTitle = document.querySelectorAll(".news__item > .news__title");
-  
-  for (let i = 0; i < allLi.length; i++) {
-    const liConstentTitle = allLiTitle[i].innerHTML;
-
-    if (liConstentTitle.includes("Mars") || liConstentTitle.includes("Martians")) {
-      allLi[i].classList.add("news__item--from-mars");
-    }
-  }
+        newItem.append(newItemTitle, newItemImg);
+        listNew.appendChild(newItem);
+      }
+    });
 }
 listNews();
