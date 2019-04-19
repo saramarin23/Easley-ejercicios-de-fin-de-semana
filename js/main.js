@@ -1,47 +1,42 @@
 "use strict";
 
-//ex03
+//ex05
 
-function listNews() {
-  const listNew = document.querySelector(".news");
+function colorPalette() {
+  const ulPalette = document.querySelector(".color-palette");
 
   fetch(
-    `https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/news.json`
+    `https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palette.json`
   )
     .then(function(response) {
       return response.json();
     })
     .then(function(data) {
-      //accedemos al objeto y cuantos arrays tiene
-      const listData = Object.keys(data.news);
+      const listPalette = Object.keys(data.palettes);
+      const everyPalette = data.palettes[0];
 
-      for (let list of listData) {
-        //accedemos a cada objeto del array news
-        const everyObj = data.news[list];
+      const newTitle = document.createElement("h2");
+      const newTitleInner = document.createTextNode(everyPalette.name);
+     
+      newTitle.appendChild(newTitleInner);
+      ulPalette.appendChild(newTitle);
+ 
 
-        let newItem = document.createElement("li");
-        const newItemTitle = document.createElement("h2");
-        const newItemImg = document.createElement("img");
+      for (let color of listPalette) {
+        const allColors = data.palettes[color];
+        const everyColor = allColors.colors;
 
-        //2 classes at the same time
-        newItem.classList.add("news__item", "news__item--no-image-visible", "heightDefault");
-        newItemTitle.classList.add("news__title");
-        newItemImg.classList.add("news__image");
+        for (let i = 0; i < everyColor.length; i++) {
+          let newLi = document.createElement("li");
+          let bgColor = everyColor[i];
 
-        newItemTitle.innerHTML = newItemImg.title = everyObj.title;
-        newItemImg.src = everyObj.image;
+          newLi.classList.add("color__item");
+          ulPalette.appendChild(newLi);
 
-        newItem.append(newItemTitle, newItemImg);
-        listNew.appendChild(newItem);
-
-        //ex04
-        function handleLiClick(event) {
-          newItem = event.currentTarget;
-          this.classList.toggle("news__item--no-image-visible");
-          this.classList.toggle("heightDefault");
+          newLi.style.background = `${bgColor}`;
+          newLi.setAttribute("style", `background-color:#${bgColor}`);
         }
-        newItem.addEventListener("click", handleLiClick);
       }
     });
 }
-listNews();
+colorPalette();
