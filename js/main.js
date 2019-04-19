@@ -24,7 +24,7 @@ const data = [
 ];
 
 
-
+// EJERCICIO 1
 function addElement() {
   for(let i = 0; i < data.length; i++) {
     // Crear elementos en HTML
@@ -46,5 +46,15 @@ function addElement() {
     newImg.classList.add('news__image');
   }
 }
-
 addElement();
+
+// EJERCICIO 2
+function featured() {
+  const theLi = document.querySelectorAll('.news__item');
+  for(let i = 0; i < theLi.length; i++) {
+    if(theLi[i].innerText.includes('Mars') || theLi[i].innerText.includes('Martians')) {
+      theLi[i].classList.add('news__item--from-mars');
+    }
+  }
+}
+featured();
