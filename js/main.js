@@ -22,7 +22,7 @@ const data = [
     image: 'https://via.placeholder.com/200x100'
   }
 ];
-
+//------------------EJERCICIO 1
 for (const item of data) {
   const list = document.querySelector('.news');
   const listItem = document.createElement('li');
@@ -40,5 +40,17 @@ for (const item of data) {
   listItem.appendChild(h2);
   listItem.appendChild(img);
   list.appendChild(listItem);
-
 }
+//-----------------------EJERCICIO 2
+const martians = document.querySelectorAll('.news__item, .news__title');
+
+for (let i = 0; i < martians.length; i++) {
+  const martiansItems = martians[i];
+
+  if(martiansItems.classList.contains('news__item') && martiansItems.innerHTML.includes('Mars')) {
+    martiansItems.classList.add('news__item--from-mars');
+  } else if(martiansItems.classList.contains('news__item') && martiansItems.innerHTML.includes('Martians')) {
+    martiansItems.classList.add('news__item--from-mars');}
+}
+
+
