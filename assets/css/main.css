@@ -51,4 +51,10 @@ body {
   height: 100px;
   display: inline-block;
 }
-
+.selected{
+  background-color: rgb(233, 233, 233);
+}
+.item{
+  list-style: none;
+  width: 50%;
+}

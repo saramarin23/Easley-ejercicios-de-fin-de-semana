@@ -49,7 +49,8 @@ fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-sema
       const colorArr = palObject[i].colors;
       createColors(colorArr, list);
     }
-
+    const palettes = document.querySelectorAll('.item');
+    handlerClick(palettes);
 
   });
 
@@ -60,5 +61,17 @@ function createColors(colorArr, parent){
     oneColor.setAttribute('style', `background-color:#${colorArr[i]}`);
     parent.appendChild(oneColor);
     
+  }
+}
+
+//07.Mis paletas preferidas
+function selectedEl(event){
+  const selected = event.currentTarget;
+  selected.classList.toggle('selected');
+}
+
+function handlerClick(palArr){
+  for(let i = 0; i < palArr.length; i++){
+    palArr[i].addEventListener('click', selectedEl);
   }
 }
