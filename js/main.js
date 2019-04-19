@@ -104,4 +104,35 @@ fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-sema
 
 //ejercicio5
 
-  
+// for (let i=0; i<5; i++) {
+//   const colors = document.createElement('div');
+//   colors.classList.add('color');
+//   console.log(colors);
+// }
+
+const container = document.querySelector('.container');
+
+fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palette.json')
+  .then(res => res.json())
+  .then(data => {
+    for (const arr of data.palettes) {
+      //titulo
+      const title = document.createElement('h2');
+      const title_cont = document.createTextNode(arr.name);
+      title.appendChild(title_cont);
+      container.appendChild(title);
+      //colores
+      for (const array_colors of arr.colors) {
+
+        const item = document.createElement('div');
+        item.classList.add('color__item');
+        
+        item.setAttribute('style', `background-color: #${array_colors}`);
+        console.log(item);
+
+        container.appendChild(item);
+      }
+
+    }
+
+  })
