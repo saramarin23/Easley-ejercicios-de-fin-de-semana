@@ -42,6 +42,7 @@ const paintNews = (array) => {
 
    //agrego clases a los elementos
    newLi.classList.add('news__item');
+   newLi.classList.add('news__item--no-image-visible');
    newTitle.classList.add('news__title');
    newImg.classList.add('news__image');
 
@@ -51,6 +52,9 @@ const paintNews = (array) => {
 
    //añado elementos a la página
    news.appendChild(newLi);
+
+   //añado listener al elemento AQUÍ DENTRO que es donde existe el elemento... Que si no no funciona!!
+   newLi.addEventListener('click', showPic);
  }
 }
 
@@ -75,3 +79,7 @@ const fetchNews = () => {
 };
 
 fetchNews();
+
+const showPic = () => {
+  event.currentTarget.classList.toggle('news__item--no-image-visible');
+};
