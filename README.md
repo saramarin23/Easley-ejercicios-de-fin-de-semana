@@ -1,7 +1,7 @@
 # Easley ejercicio extra
 Ejercicios de fin de semana
 
-<!-- TOC depthFrom:2 --> **
+<!-- TOC depthFrom:2 --> 
 
 - [Pautas](#pautas)
 - [Ejercicios](#ejercicios)
