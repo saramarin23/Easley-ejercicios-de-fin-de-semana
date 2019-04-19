@@ -1,5 +1,4 @@
 "use strict";
-console.log("hola!");
 
 const data = [
   {
@@ -24,11 +23,10 @@ const data = [
   }
 ];
 
-const listNew = document.querySelector(".news");
-
+//ex01
 function listNews() {
+  const listNew = document.querySelector(".news");
   const listData = Object.keys(data);
-  //console.log(listData);
 
   //recorremos el objeto data
   for (let list of listData) {
@@ -50,7 +48,18 @@ function listNews() {
     newTitleContent.innerHTML = eachObj.title;
 
     listNew.appendChild(newItem);
-    console.log(newItem);
+  }
+
+  //ex02
+  const allLi = document.querySelectorAll(".news__item");
+  const allLiTitle = document.querySelectorAll(".news__item > .news__title");
+  
+  for (let i = 0; i < allLi.length; i++) {
+    const liConstentTitle = allLiTitle[i].innerHTML;
+
+    if (liConstentTitle.includes("Mars") || liConstentTitle.includes("Martians")) {
+      allLi[i].classList.add("news__item--from-mars");
+    }
   }
 }
 listNews();
