@@ -25,17 +25,20 @@ const data = [
 
 for (const item of data) {
   const list = document.querySelector('.news');
+  const listItem = document.createElement('li');
   const h2 = document.createElement('h2');
   const img = document.createElement('img');
   const image = item.image;
 
   const title = document.createTextNode(item.title);
-  
+  listItem.setAttribute('class', 'news__item');
   h2.setAttribute('class', 'news__title');
   img.setAttribute('class', 'news__image');
   img.setAttribute('src', `${image}`);
+
   h2.appendChild(title);
-  list.appendChild(h2);
-  list.appendChild(img);
+  listItem.appendChild(h2);
+  listItem.appendChild(img);
+  list.appendChild(listItem);
 
 }
