@@ -58,3 +58,6 @@ body {
   list-style: none;
   width: 50%;
 }
+.hidden{
+  display: none;
+}
