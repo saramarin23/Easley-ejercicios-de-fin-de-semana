@@ -22,3 +22,21 @@ const data = [
     image: 'https://via.placeholder.com/200x100'
   }
 ];
+
+const listEl = document.querySelector('.news');
+for (const news of data){
+  const newsItem = document.createElement('ĺi');
+  const newsTitle = document.createElement('h2');
+  const newsTitleContent = document.createTextNode(news.title);
+  const newsImage = document.createElement('img');
+  newsItem.classList.add('news__item');
+  newsTitle.classList.add('news__title');
+  newsImage.classList.add('news__image');
+  listEl.appendChild(newsItem);
+  newsItem.appendChild(newsTitle);
+  newsItem.appendChild(newsImage);
+  newsImage.src =news.image;
+  newsImage.alt =news.title;
+  newsTitle.appendChild(newsTitleContent);
+
+}
