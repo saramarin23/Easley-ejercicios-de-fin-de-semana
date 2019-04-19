@@ -22,3 +22,20 @@ const data = [
     image: 'https://via.placeholder.com/200x100'
   }
 ];
+
+for (const item of data) {
+  const list = document.querySelector('.news');
+  const h2 = document.createElement('h2');
+  const img = document.createElement('img');
+  const image = item.image;
+
+  const title = document.createTextNode(item.title);
+  
+  h2.setAttribute('class', 'news__title');
+  img.setAttribute('class', 'news__image');
+  img.setAttribute('src', `${image}`);
+  h2.appendChild(title);
+  list.appendChild(h2);
+  list.appendChild(img);
+
+}
