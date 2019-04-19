@@ -120,3 +120,28 @@ function toggleImage (event) {
   currentNews.classList.toggle('news__item--no-image-visible');
 }
 
+//EJERCICIO 5
+
+
+fetch ('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palette.json')
+  .then(response => response.json())
+  .then(function(data){
+    const {palettes} = data;
+    const [ship] = palettes;
+    createPalette(ship);
+  });
+
+function createPalette (ship) {
+  const palettesUlEl = document.querySelector('.palettes');
+  const newLi = document.createElement('li');
+  const newH2 = document.createElement('h2');
+  newLi.classList.add('palette__container');
+  newH2.classList.add('palette__name');
+  newH2.innerHTML = ship.name;
+  newLi.appendChild(newH2);
+  for (const color of ship.colors){
+    const newDiv = `<div class="color__item" style="background-color: #${color}"></div>`;
+    newLi.innerHTML += newDiv;
+    palettesUlEl.appendChild(newLi);
+  }
+}

@@ -45,3 +45,20 @@ body {
 .news__item--no-image-visible .news__image {
   display: none;
 }
+
+/* EJERCICIO 5 */
+
+.palette__container{
+  list-style: none;
+}
+.palette__name{
+  font-family: "Lucida Console", Monaco, monospace;
+  font-style: italic;
+  font-size: 16px;
+}
+.color__item {
+  display: inline-block;
+  height: 100px;
+  width: 100px;
+  box-shadow: -1px 3px 4px rgba(0, 0, 0, 0.3);
+}
