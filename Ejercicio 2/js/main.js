@@ -24,6 +24,8 @@ const data = [
   }
 ];
 
+const searchTerms = ['Mars', 'Martian'];
+
 const printNews = array => {
   for (const item of array) {
     const newListItem = document.createElement('li');
@@ -46,19 +48,29 @@ const printNews = array => {
 
 printNews(data);
 
-const fromMars = () => {
-    const newsElements = document.querySelectorAll('news__item');
-  
-    let list = [];
-    for (const element of newsElements){
-      list.push(element);
-      console.log(list);
+const searchTitles = (listItems, titles, strings) => {
+  for (let i = 0; i < titles.length; i++) {
+    for (const term of strings) {
+      if (titles[i].includes(term)) {
+        console.log(listItems[i]);
+        listItems[i].classList.add('news__item--from-mars');
+      }
     }
-  
-  fromMars();
-  
-  // Buscaremos todos los elementos con clase .news__item.
-  // Recorreremos la lista de elementos almacenando en una variable el contenido del título de cada elemento.
-  // Usando el método includes() comprobaremos si contienen “Mars” o “Martian” y aplicaremos al li correspondiente la clase .news__item--from-mars
-  
-  // .news__item--from-mars
+  }
+};
+
+const getTitles = () =>  {
+  const allNews = document.querySelectorAll('.news__item');
+  console.log("allnews",allNews);
+  let titlesList = [];
+  for (let i = 0; i < allNews.length; i++) {
+    titlesList.push(allNews[i].childNodes[0].innerHTML);
+  }
+  searchTitles(allNews, titlesList, searchTerms);
+};
+
+getTitles();
+
+
+
+// searchTitles(titlesList, searchTerms);
