@@ -54,42 +54,69 @@
 // }
 
 //---------------EJERCICIO 3
-const api =
-  'https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/news.json';
+// const api =
+//   'https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/news.json';
 
+// fetch(api)
+//   .then(response => response.json())
+//   .then(data => {
+//     for (const item of data.news) {
+//       const list = document.querySelector('.news');
+//       const listItem = document.createElement('li');
+//       const h2 = document.createElement('h2');
+//       const img = document.createElement('img');
+//       const image = item.image;
+
+//       const title = document.createTextNode(item.title);
+//       // listItem.setAttribute('class', 'news__item');
+//       listItem.setAttribute('class', 'news__item--no-image-visible');
+//       h2.setAttribute('class', 'news__title');
+//       img.setAttribute('class', 'news__image');
+//       img.setAttribute('src', `${image}`);
+
+//       h2.appendChild(title);
+//       listItem.appendChild(h2);
+//       listItem.appendChild(img);
+//       list.appendChild(listItem);
+//----------------------- EJERCICIO 4
+//     const showImages = e => {
+//       console.log(e.currentTarget);
+//       const trigger = e.currentTarget.parentElement;
+//       console.log(trigger);
+//       // const triggerPE = trigger.parentElement;
+//       if (trigger.classList.contains('news__item--no-image-visible')) {
+//         trigger.classList.remove('news__item--no-image-visible');
+//       } else {
+//         trigger.classList.add('news__item--no-image-visible');
+//       }
+//     };
+//     h2.addEventListener('click', showImages);
+//   }
+// });
+//-------------------------EJERCICIO 5
+const api =
+  'https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palette.json';
 fetch(api)
   .then(response => response.json())
   .then(data => {
-    for (const item of data.news) {
-      const list = document.querySelector('.news');
-      const listItem = document.createElement('li');
-      const h2 = document.createElement('h2');
-      const img = document.createElement('img');
-      const image = item.image;
+    const array = data.palettes;
 
-      const title = document.createTextNode(item.title);
-      // listItem.setAttribute('class', 'news__item');
-      listItem.setAttribute('class', 'news__item--no-image-visible');
-      h2.setAttribute('class', 'news__title');
-      img.setAttribute('class', 'news__image');
-      img.setAttribute('src', `${image}`);
+    for (let i = 0; i < array.length; i++) {
+      const items = array[i];
+      const colors = items.colors;
+      console.log('array de colores', colors);
 
-      h2.appendChild(title);
-      listItem.appendChild(h2);
-      listItem.appendChild(img);
-      list.appendChild(listItem);
-//----------------------- EJERCICIO 4
-      const showImages = e => {
-        console.log(e.currentTarget);
-        const trigger = e.currentTarget.parentElement;
-        console.log(trigger);
-        // const triggerPE = trigger.parentElement;
-        if (trigger.classList.contains('news__item--no-image-visible')) {
-          trigger.classList.remove('news__item--no-image-visible');
-        } else {
-          trigger.classList.add('news__item--no-image-visible');
-        }
-      };
-      h2.addEventListener('click', showImages);
+      for (const colorsItems of colors) {
+        console.log('hola', colorsItems);
+      }
+
+      for (let i = 0; i < colors.length; i++) {
+        const body = document.querySelector('body');
+        const container = document.createElement('div');
+        body.appendChild(container);
+        container.setAttribute('class', 'color__item');
+        container.setAttribute('style', `background-color: #${colors[i]}`);
+        console.log('pri', colors[i]);
+      }
     }
   });
