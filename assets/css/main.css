@@ -46,3 +46,9 @@ body {
   display: none;
 }
 
+.color__item{
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+}
+
