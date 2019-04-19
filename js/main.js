@@ -99,16 +99,10 @@ fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-sema
 
       item_list.addEventListener('click', noImage);
     }
-  })*/
+  })
 
 
 //ejercicio5
-
-// for (let i=0; i<5; i++) {
-//   const colors = document.createElement('div');
-//   colors.classList.add('color');
-//   console.log(colors);
-// }
 
 const container = document.querySelector('.container');
 
@@ -128,11 +122,49 @@ fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-sema
         item.classList.add('color__item');
         
         item.setAttribute('style', `background-color: #${array_colors}`);
-        console.log(item);
 
         container.appendChild(item);
       }
 
     }
 
-  })
+  })*/
+
+  //ejercicio6
+
+  const container = document.querySelector('.container');
+
+  fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palettes.json')
+    .then(res=>res.json())
+    .then(data => {
+      for (const arr_palettes of data.palettes){
+      
+        const title = document.createElement('h2');
+        title.classList.add('title');
+        const origin = document.createElement('h3');
+        origin.classList.add('origin');
+        const colors = document.createElement('div');
+        colors.classList.add('color');
+
+        const title_cont = document.createTextNode(`Nombre de la nave: ${arr_palettes.name}`);
+        const origin_cont = document.createTextNode(`Serie: ${arr_palettes.from}`);
+        
+        title.appendChild(title_cont);
+        origin.appendChild(origin_cont);
+        container.appendChild(title);
+        container.appendChild(origin);
+        
+        const color_container = document.createElement('div');
+        color_container.classList.add('color_container');
+        container.appendChild(color_container);
+
+        for (const colors of arr_palettes.colors) {
+          
+          const item = document.createElement('div');
+          item.classList.add('color__item');
+          item.setAttribute('style', `background-color: #${colors}`);
+          color_container.appendChild(item);
+        }
+      
+      }
+    })
