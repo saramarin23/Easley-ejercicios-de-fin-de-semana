@@ -1,6 +1,7 @@
 'use strict';
 
 const news = document.querySelector('.news');
+
 const data = [
   {
     title: 'Asteroids 101',
@@ -53,9 +54,6 @@ const paintNews = (array) => {
  }
 }
 
-paintNews(data);
-
-
 const martianNews = () => {
   const allNews = document.querySelectorAll('.news__item');
   for (const item of allNews) {
@@ -66,4 +64,14 @@ const martianNews = () => {
   }
 }
 
-martianNews();
+const fetchNews = () => {
+  fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/news.json')
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+      paintNews(data.news);
+      martianNews();
+    });
+};
+
+fetchNews();
