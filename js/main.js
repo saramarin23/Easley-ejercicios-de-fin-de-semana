@@ -76,26 +76,47 @@ const container = document.querySelector('.news');
 fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/news.json')
   .then(response => response.json())
   .then(newsData =>{
-    console.log(newsData);
     const news = newsData.news;
-    console.log(news);
     for(let i=0; i<news.length; i++){
+      //Crear un li por cada elemento del array que tenga clase news__item y contenga:
       const item = document.createElement('li');
       item.setAttribute('class', 'news__item');
-
+      //titulo h2 clase news__title
       const title = document.createElement('h2');
       title.setAttribute('class', 'news__title');
       const titleText = document.createTextNode(news[i].title);
       title.appendChild(titleText);
-
+      //imagen news__image
       const image = document.createElement('img');
       image.src = news[i].image;
       image.setAttribute('class', 'news__image');
       image.setAttribute('alt', news[i].title);
-
+      //put img and h2 inside li and li inside ul
       item.appendChild(title);
       item.appendChild(image);
       container.appendChild(item);
+
     }
+    const list = document.querySelectorAll('.news__item');
+    handlerLi(list);
   });
 
+//4. Ahora me ves...
+//por defecto no se van a ver las imágenes, pero al hacer click haremos que sean visibles o vuelvan a ser invisibles... y todo cambiando 1 sola clase que aplicaremos al contenedor general de cada noticia, el LI.
+
+function changeClass(event) {
+  const element = event.currentTarget;
+  element.classList.toggle('news__item--no-image-visible');
+
+}
+
+function handlerLi(list){
+  for (let i = 0; i < list.length; i++) {
+    //Por defecto todos los LI tendrán una clase extra: news__item--no-image-visible que hará que la imagen del LI no se vea
+    list[i].classList.add('news__item--no-image-visible');
+    list[i].addEventListener('click', changeClass);
+  }
+}
+//5.Todo es color entre tú y tus arrays...
+
+// Esta vez tenemos una URL https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palette.json que nos devuelve datos de una paleta y tenemos que pintarla como en el ejemplo:
