@@ -8,7 +8,7 @@ const urlData =
 
 const newsList = document.querySelector ('.news');
 const paletteList = document.querySelector ('.palettes');
-const newPaletteList = document.querySelector ('.palettes__section--new');
+const newPaletteList = document.querySelector ('.new__palettes');
 
 function fetchData (url) {
   fetch (url).then (response => response.json ()).then (dataAll => {
@@ -81,16 +81,26 @@ function secondPalette (urlToFetch) {
       const newPaletteRow = document.createElement ('li');
       newPaletteRow.setAttribute ('class', 'palette__item');
 
+      const newInput = document.createElement ('input');
+      newInput.setAttribute ('name', 'chooseTheme');
+      newInput.setAttribute ('class', 'input__palette');
+      newInput.type = 'checkbox';
+      newPaletteRow.appendChild (newInput);
+
       const newPaletteText = document.createTextNode (palette.name);
       newPaletteRow.appendChild (newPaletteText);
+
+      const newListColors = document.createElement ('ul');
+      newListColors.setAttribute ('class', 'palette__item');
 
       for (const color of palette.colors) {
         const newPalette = document.createElement ('li');
         newPalette.setAttribute ('class', 'color__item');
         newPalette.style.backgroundColor = `#${color}`;
-        newPaletteRow.appendChild (newPalette);
+        newListColors.appendChild (newPalette);
       }
 
+      newPaletteRow.appendChild (newListColors);
       newPaletteList.appendChild (newPaletteRow);
     }
   });
