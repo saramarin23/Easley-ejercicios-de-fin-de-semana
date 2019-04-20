@@ -58,14 +58,20 @@ function changeStyles() {
   }
 }
 
-fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/news.json')
-  .then(response => response.json())
-  .then (data => {
-    createLi(data.news);
-    changeStyles();
+const savedNews = JSON.parse(localStorage.getItem('savedNews'));
 
-  });
-
+if(savedNews) {
+  createLi(savedNews);
+  changeStyles();
+}else {
+  fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/news.json')
+    .then(response => response.json())
+    .then (data => {
+      createLi(data.news);
+      changeStyles();
+      localStorage.setItem('savedNews', JSON.stringify(data.news));
+    });
+}
 // ejercicio 5
 
 
@@ -90,22 +96,35 @@ function createPalettes(container, palettes) {
   }
 }
 
+const savedPalette = JSON.parse(localStorage.getItem('savedPalette'));
+const palette = document.querySelector('.palette');
 
-fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palette.json')
-  .then(response => response.json())
-  .then(data => {
-    const palette = document.querySelector('.palette');
-    createPalettes(palette, data.palettes);
-  });
-
+if(savedPalette) {
+  createPalettes(palette, savedPalette);
+}else {
+  fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palette.json')
+    .then(response => response.json())
+    .then(data => {
+      createPalettes(palette, data.palettes);
+      localStorage.setItem('savedPalette', JSON.stringify(data.palettes));
+    });
+}
 //ejercicio 6
 
-fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palettes.json')
-  .then(response => response.json())
-  .then(data => {
-    const morePalettes = document.querySelector('.more__palettes');
-    createPalettes(morePalettes, data.palettes);
-  });
+const morePalettes = document.querySelector('.more__palettes');
+const palettes = JSON.parse(localStorage.getItem('palettes'));
+
+if(palettes) {
+  createPalettes(morePalettes, palettes);
+}else {
+  fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palettes.json')
+    .then(response => response.json())
+    .then(data => {
+      createPalettes(morePalettes, data.palettes);
+      localStorage.setItem('palettes', JSON.stringify(data.palettes));
+    });
+}
+
 
 // ejercicio 8
 
@@ -127,4 +146,6 @@ function filterItems () {
 }
 
 input.addEventListener('keyup', filterItems);
+
+
 
