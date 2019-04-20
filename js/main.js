@@ -69,30 +69,33 @@ fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-sema
     return console.log(data.news);
   });
 
-  fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palette.json')
+  fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palettes.json')
   .then(function (response) {
     return response.json();
   })
   .then(function (data) {
-    const dataPalette = data.palettes;
-    const dataElement = dataPalette[0];
-    const dataColors = dataElement.colors;
-    const dataName = dataElement.name;
+    const ships = data.palettes;
 
+    for (let ship of ships){
+
+    const dataColors = ship.colors;
+    const dataName = ship.name;
+    const shipDiv = document.createElement('div')
     const shipName = document.createElement('h1');
     const newName = document.createTextNode(dataName);
+    shipDiv.classList.add('ship');
     shipName.appendChild(newName);
-    divContainer.appendChild(shipName);
+    shipDiv.appendChild(shipName);
+    divContainer.appendChild(shipDiv);
 
     for (let color of dataColors){
       const newColor = document.createElement('div');
       newColor.classList.add('color');
       newColor.setAttribute('style',`background-color:#${color}`);
-      divContainer.appendChild(newColor);
+      shipDiv.appendChild(newColor);
       console.log(color);
+    } 
     }
-    return console.log(dataColors);
-
 
   });
 
