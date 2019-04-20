@@ -22,3 +22,22 @@ const data = [
     image: 'https://via.placeholder.com/200x100'
   }
 ];
+
+const listContainer = document.querySelector('.news');
+
+for (let listElement of data){
+  const newItem = document.createElement('li');
+  const newTitle = document.createElement('h1');
+  const newImg = document.createElement('img');
+  const newContent = document.createTextNode(listElement.title);
+  newItem.classList.add('news__item');
+  newTitle.classList.add('news__title');
+  newImg.classList.add('news__img');
+  newImg.src = listElement.image;
+  newImg.alt = "imagen de la película" + listElement.title;
+
+  newTitle.appendChild(newContent);
+  listContainer.appendChild(newItem);
+  newItem.appendChild(newTitle);
+  newItem.appendChild(newImg);
+}
