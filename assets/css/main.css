@@ -75,3 +75,7 @@ body {
   width: 50px;
   list-style: none;
 }
+
+.selected__item {
+  background: lightgrey;
+}

@@ -111,6 +111,6 @@ function secondPalette (urlToFetch) {
 secondPalette (secondUrlPalette);
 
 function selectedItem(event) {
-  const selected = event.currentTarget;
+  const selected = event.currentTarget.parentElement;
   selected.classList.toggle('selected__item');
 }
