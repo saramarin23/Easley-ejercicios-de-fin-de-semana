@@ -45,3 +45,20 @@ body {
 .news__item--no-image-visible .news__image {
   display: none;
 }
+
+.palettes__section{
+  padding: 0 50px;
+}
+
+.palettes {
+  display: flex;
+  margin: 0 0;
+  padding-left: 0;
+}
+
+.color__item {
+  height: 50px;
+  width: 50px;
+  list-style: none;
+ 
+}

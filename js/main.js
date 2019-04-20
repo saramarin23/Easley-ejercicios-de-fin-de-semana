@@ -1,28 +1,5 @@
 'use strict';
 
-// const data = [
-//   {
-//     title: 'Asteroids 101',
-//     image: 'https://via.placeholder.com/200x100',
-//   },
-//   {
-//     title: 'Life on Mars',
-//     image: 'https://via.placeholder.com/200x100',
-//   },
-//   {
-//     title: 'Martians invade Earth',
-//     image: 'https://via.placeholder.com/200x100',
-//   },
-//   {
-//     title: "Humans aren't real",
-//     image: 'https://via.placeholder.com/200x100',
-//   },
-//   {
-//     title: 'Space The Final Frontier',
-//     image: 'https://via.placeholder.com/200x100',
-//   },
-// ];
-
 const urlData =
   'https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/news.json';
 
@@ -30,6 +7,7 @@ const urlData =
 //Pinta array en el html.
 
 const newsList = document.querySelector ('.news');
+const paletteList = document.querySelector ('.palettes');
 
 function fetchData (url) {
   fetch (url).then (response => response.json ()).then (dataAll => {
@@ -54,7 +32,6 @@ function fetchData (url) {
       newItem.appendChild (newImage);
       newItem.addEventListener ('click', toggleClass);
       newsList.appendChild (newItem);
-
     }
 
     //Añade clase a los elementos que contengan Martian o Mars.
@@ -69,9 +46,26 @@ function fetchData (url) {
     //Quita las imagenes
     function toggleClass (event) {
       const trigger = event.currentTarget;
-      trigger.classList.toggle('news__item--no-image-visible');
+      trigger.classList.toggle ('news__item--no-image-visible');
     }
   });
 }
 
 fetchData (urlData);
+
+const urlPalette =
+  'https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palette.json';
+
+function paletteFetch (urlToFetch) {
+  fetch (urlToFetch).then (response => response.json ()).then (data => {
+    const colorsPalette = data.palettes[0].colors;
+    for (const color of colorsPalette) {
+      const newPalette = document.createElement('li');
+      newPalette.setAttribute('class', 'color__item');
+      newPalette.style.backgroundColor = `#${color}`;
+      paletteList.appendChild(newPalette);
+    }
+  });
+}
+
+paletteFetch (urlPalette);
