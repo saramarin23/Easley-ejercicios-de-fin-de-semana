@@ -44,3 +44,12 @@ body {
 .news__item--no-image-visible {
   display: none;
 }
+.rect{
+  width:100px;
+  height: 100px;
+  
+}
+.container{
+  display: flex;
+  flex-direction: row;
+}
