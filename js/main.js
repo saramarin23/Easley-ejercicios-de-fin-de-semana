@@ -122,14 +122,13 @@ function toggleImage (event) {
 
 //EJERCICIO 5
 
-
-fetch ('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palette.json')
-  .then(response => response.json())
-  .then(function(data){
-    const {palettes} = data;
-    const [ship] = palettes;
-    createPalette(ship);
-  });
+// fetch ('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palette.json')
+//   .then(response => response.json())
+//   .then(function(data){
+//     const {palettes} = data;
+//     const [ship] = palettes;
+//     createPalette(ship);
+//   });
 
 function createPalette (ship) {
   const palettesUlEl = document.querySelector('.palettes');
@@ -145,3 +144,14 @@ function createPalette (ship) {
     palettesUlEl.appendChild(newLi);
   }
 }
+
+//EJERCICIO 6
+
+fetch ('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palettes.json')
+  .then(response => response.json())
+  .then(function(data){
+    const {palettes} = data;
+    for (const ship of palettes){
+      createPalette(ship);
+    }
+  });
