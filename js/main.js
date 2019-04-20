@@ -8,6 +8,7 @@ const urlData =
 
 const newsList = document.querySelector ('.news');
 const paletteList = document.querySelector ('.palettes');
+const newPaletteList = document.querySelector ('.palettes__section--new');
 
 function fetchData (url) {
   fetch (url).then (response => response.json ()).then (dataAll => {
@@ -60,12 +61,39 @@ function paletteFetch (urlToFetch) {
   fetch (urlToFetch).then (response => response.json ()).then (data => {
     const colorsPalette = data.palettes[0].colors;
     for (const color of colorsPalette) {
-      const newPalette = document.createElement('li');
-      newPalette.setAttribute('class', 'color__item');
+      const newPalette = document.createElement ('li');
+      newPalette.setAttribute ('class', 'color__item');
       newPalette.style.backgroundColor = `#${color}`;
-      paletteList.appendChild(newPalette);
+      paletteList.appendChild (newPalette);
     }
   });
 }
 
 paletteFetch (urlPalette);
+
+const secondUrlPalette =
+  'https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palettes.json';
+
+function secondPalette (urlToFetch) {
+  fetch (urlToFetch).then (response => response.json ()).then (data => {
+    const newPalettes = data.palettes;
+    for (const palette of newPalettes) {
+      const newPaletteRow = document.createElement ('li');
+      newPaletteRow.setAttribute ('class', 'palette__item');
+
+      const newPaletteText = document.createTextNode (palette.name);
+      newPaletteRow.appendChild (newPaletteText);
+
+      for (const color of palette.colors) {
+        const newPalette = document.createElement ('li');
+        newPalette.setAttribute ('class', 'color__item');
+        newPalette.style.backgroundColor = `#${color}`;
+        newPaletteRow.appendChild (newPalette);
+      }
+
+      newPaletteList.appendChild (newPaletteRow);
+    }
+  });
+}
+
+secondPalette (secondUrlPalette);

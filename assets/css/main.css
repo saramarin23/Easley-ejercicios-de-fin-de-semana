@@ -48,17 +48,30 @@ body {
 
 .palettes__section{
   padding: 0 50px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .palettes {
   display: flex;
+  justify-content: center;
   margin: 0 0;
   padding-left: 0;
+}
+
+.palette__item {
+  display: flex;
+  margin: 20px 20px;
 }
 
 .color__item {
   height: 50px;
   width: 50px;
   list-style: none;
- 
+}
+
+.color__item--new {
+  height: 50px;
+  width: 50px;
+  list-style: none;
 }
