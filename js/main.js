@@ -66,26 +66,42 @@ fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-sema
 
   });
 
-// ejercicio de la paleta
+// ejercicio 5
+
+
+function createPalettes(container, palettes) {
+  for (const palette of palettes) {
+    const wrapper = document.createElement('div');
+    wrapper.classList.add('wrapper');
+    const title = document.createElement('h2');
+    title.classList.add('title');
+    const titleContent = document.createTextNode(palette.name);
+    title.appendChild(titleContent);
+    wrapper.appendChild(title);
+    container.appendChild(wrapper);
+    for (const color of palette.colors) {
+      const div = document.createElement('div');
+      wrapper.appendChild(div);
+      div.classList.add('color__item');
+      div.style.backgroundColor = `#${color}`;
+      container.appendChild(wrapper);
+    }
+  }
+}
+
 
 fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palette.json')
   .then(response => response.json())
   .then(data => {
-    const colorPalette = data.palettes[0].colors;
-    //creamos el titulo
     const palette = document.querySelector('.palette');
-    const title = document.createElement('h2');
-    title.classList.add('title');
-    const titleContent = document.createTextNode('Space Ship');
-    title.appendChild(titleContent);
-    palette.appendChild(title);
-    //creamos los divs de la paleta
-    for (const color of colorPalette) {
-      const div = document.createElement('div');
-      palette.appendChild(div);
-      div.classList.add('color__item');
-      div.style.backgroundColor = `#${color}`;
-    }
-
+    createPalettes(palette, data.palettes);    
   });
 
+//ejercicio 6
+
+fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palettes.json')
+  .then(response => response.json())
+  .then(data => {
+    const morePalettes = document.querySelector('.more__palettes');
+    createPalettes(morePalettes, data.palettes);    
+  });
