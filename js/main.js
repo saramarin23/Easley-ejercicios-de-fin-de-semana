@@ -37,8 +37,9 @@ fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-sema
       const newImg = document.createElement('img');
       const newContent = document.createTextNode(listElement.title);
       newItem.classList.add('news__item');
+      newItem.classList.add('news__item--no-image-visible');
       newTitle.classList.add('news__title');
-      newImg.classList.add('news__img');
+      newImg.classList.add('news__image');
       newImg.src = listElement.image;
       newImg.alt = "imagen de la película " + listElement.title;
 
@@ -54,15 +55,21 @@ fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-sema
       const titleContent = newsTitle.innerHTML;
       if (titleContent.includes('Mars') || titleContent.includes('Martians')) {
         item.classList.add('news__item--from-mars');
-        console.log('hola');
       }
       else {
       }
+      item.addEventListener('click', handleItemClick);
+      function handleItemClick(event){
+        const news = event.currentTarget;
+        //const currentImage = news.childNodes[1];
+        news.classList.toggle('news__item--no-image-visible');
+        console.log(news);
+      }
     }
-
     return console.log(data.news);
-
   });
+
+  
 
 
 
