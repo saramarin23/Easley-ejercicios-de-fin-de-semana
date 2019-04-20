@@ -177,7 +177,22 @@ fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-sema
         }
 
         palette.addEventListener('click', selectPalette);
+
+//ejercicio8
+
+        const input = document.querySelector('.field');
+
+        function search() {
+          if(arr_palettes.name.includes(input.value)) {
+            palette.classList.remove('hidden');
+          } else {
+            palette.classList.add('hidden');
+          }
+        }
+        
+        input.addEventListener('keyup', search);
       }
     })
 
-    
+
+

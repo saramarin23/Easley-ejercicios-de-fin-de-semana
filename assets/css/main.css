@@ -53,10 +53,15 @@ body {
 }
 
 .selected {
-  border: 2px solid lightgreen;
-  box-sizing: border-box;
+  border: 2px solid green;
+  background: lightgreen;
+  padding: 10px;
 }
 
 .palette {
   list-style: none;
+}
+
+.hidden {
+  display: none;
 }
