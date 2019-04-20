@@ -2,6 +2,7 @@ body {
   background: #fffdfa;
   color: #332100;
   margin: 0;
+  box-sizing: border-box;
 }
 
 .news {
@@ -60,4 +61,8 @@ margin-left: 40px;
 }
 h1 {
   font-size: 18px;
+}
+.like {
+  background-color: rgb(191, 247, 191);
+  border: 2px solid green;
 }

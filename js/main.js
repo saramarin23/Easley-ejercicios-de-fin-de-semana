@@ -77,7 +77,7 @@ fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-sema
     const ships = data.palettes;
 
     for (let ship of ships){
-
+    
     const dataColors = ship.colors;
     const dataName = ship.name;
     const shipDiv = document.createElement('div')
@@ -96,7 +96,13 @@ fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-sema
       console.log(color);
     } 
     }
-
+    const shipDiv = document.querySelectorAll('.ship');
+    for (let ship of shipDiv)
+    ship.addEventListener('click', handleShipClick);
+    function handleShipClick(event){
+    const shipElement = event.currentTarget;
+    shipElement.classList.toggle('like');
+    }
   });
 
 
