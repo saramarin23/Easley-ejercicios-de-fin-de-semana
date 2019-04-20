@@ -23,6 +23,7 @@
 //   }
 // ];
 
+// creamos los elementos del html
 function createLi(data) {
   for (const obj of data) {
     const news = document.querySelector('.news');
@@ -43,6 +44,7 @@ function createLi(data) {
   }
 }
 
+// creamos los estilos
 function changeStyles() {
   const allNews = document.querySelectorAll('.news__item');
   for (let i = 0; i < allNews.length; i ++) {
@@ -51,6 +53,7 @@ function changeStyles() {
     if (titleContent.includes('Mars') || titleContent.includes('Martian')) {
       allNews[i].classList.add('news__item--from-mars');
     }
+    // trigger para ocultar/mostrar la imagen
     allNews[i].addEventListener('click', function(){allNews[i].classList.toggle('news__item--no-image-visible');});
   }
 }
@@ -60,6 +63,29 @@ fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-sema
   .then (data => {
     createLi(data.news);
     changeStyles();
+
+  });
+
+// ejercicio de la paleta
+
+fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palette.json')
+  .then(response => response.json())
+  .then(data => {
+    const colorPalette = data.palettes[0].colors;
+    //creamos el titulo
+    const palette = document.querySelector('.palette');
+    const title = document.createElement('h2');
+    title.classList.add('title');
+    const titleContent = document.createTextNode('Space Ship');
+    title.appendChild(titleContent);
+    palette.appendChild(title);
+    //creamos los divs de la paleta
+    for (const color of colorPalette) {
+      const div = document.createElement('div');
+      palette.appendChild(div);
+      div.classList.add('color__item');
+      div.style.backgroundColor = `#${color}`;
+    }
 
   });
 

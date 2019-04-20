@@ -44,3 +44,12 @@ body {
 .news__item--no-image-visible .news__image {
   display: none;
 }
+
+.palette {
+  padding-left: 20px;
+}
+.color__item {
+  display: inline-block;
+  height: 100px;
+  width: 100px;
+}
