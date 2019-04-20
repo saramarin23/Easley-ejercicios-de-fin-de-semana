@@ -28,6 +28,7 @@ function createLi(data) {
     const news = document.querySelector('.news');
     const newItem = document.createElement('li');
     newItem.classList.add('news__item');
+    newItem.classList.add('news__item--no-image-visible');
     const newTitle = document.createElement('h2');
     newTitle.classList.add('news__title');
     const  titleContent = document.createTextNode(`Title: ${obj.title}`);
@@ -50,6 +51,7 @@ function changeStyles() {
     if (titleContent.includes('Mars') || titleContent.includes('Martian')) {
       allNews[i].classList.add('news__item--from-mars');
     }
+    allNews[i].addEventListener('click', function(){allNews[i].classList.toggle('news__item--no-image-visible');});
   }
 }
 
@@ -58,4 +60,6 @@ fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-sema
   .then (data => {
     createLi(data.news);
     changeStyles();
+
   });
+
