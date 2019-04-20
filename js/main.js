@@ -187,12 +187,9 @@ function selectedPalette() {
 // EJERCICIO 8
 
 const searchPalette = () => {
-  // console.log(input.value);
   const titleShip = document.querySelectorAll(".spaceship-colors__title");
   for (const item of titleShip) {
     const titleInner = item.innerHTML;
-    console.log(titleInner);
-    console.log(input.value);
     if (titleInner.includes(input.value)) {
       item.parentElement.classList.remove("hidden");
     } else {
