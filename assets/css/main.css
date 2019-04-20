@@ -50,7 +50,6 @@ body {
 
 .palettes {
   margin: 0 auto;
-  padding: 40px;
   width: 640px;
   text-align: center;
 }
@@ -76,4 +75,12 @@ body {
 .selected__palette{
   background-color: #a2e8c6;
   border-radius: 10px;
+}
+
+/* EJERCICIO 8*/
+
+.form {
+  text-align: center;
+  font-family: "Lucida Console", Monaco, monospace;
+  padding: 20px; 
 }

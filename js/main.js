@@ -147,15 +147,16 @@ function createPalette (ship) {
 
 //EJERCICIO 6
 
-fetch ('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palettes.json')
-  .then(response => response.json())
-  .then(function(data){
-    const {palettes} = data;
-    for (const ship of palettes){
-      createPalette(ship);
-      addListenersToPaletteContainers(); //añadido para ejercicio 7
-    }
-  });
+// fetch ('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palettes.json')
+//   .then(response => response.json())
+//   .then(function(data){
+//     const {palettes} = data;
+//     for (const ship of palettes){
+//       createPalette(ship);
+      
+//     }
+//     addListenersToPaletteContainers(); //añadido para ejercicio 7
+//   });
 
 //EJERCICIO 7
 
@@ -169,3 +170,30 @@ function addListenersToPaletteContainers () {
 function selectPalette (event) {
   event.currentTarget.classList.toggle('selected__palette');
 }
+
+//EJERCICIO 8
+
+const inputEl = document.querySelector('.search__input');
+
+fetch ('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palettes.json')
+  .then(response => response.json())
+  .then(function(data){
+    const {palettes} = data;
+    for (const ship of palettes){
+      createPalette(ship);
+    }
+    function searchShip (){
+      const searchText = inputEl.value;
+      const palettesUlEl = document.querySelector('.palettes');
+      palettesUlEl.innerHTML = '';
+      for (const ship of palettes) {
+        const search = searchText.toLowerCase();
+        const shipName = ship.name.toLowerCase();
+        if(shipName.includes(search)){
+          createPalette(ship);
+        }
+      }
+    }
+    addListenersToPaletteContainers(); //añadido para ejercicio 7
+    inputEl.addEventListener('keyup', searchShip);
+  });
