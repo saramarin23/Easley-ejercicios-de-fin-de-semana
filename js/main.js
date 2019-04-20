@@ -153,5 +153,19 @@ fetch ('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-sem
     const {palettes} = data;
     for (const ship of palettes){
       createPalette(ship);
+      addListenersToPaletteContainers(); //añadido para ejercicio 7
     }
   });
+
+//EJERCICIO 7
+
+function addListenersToPaletteContainers () {
+  const paletteContainers = document.querySelectorAll('.palette__container');
+  for (const container of paletteContainers){
+    container.addEventListener('click', selectPalette);
+  }
+}
+
+function selectPalette (event) {
+  event.currentTarget.classList.toggle('selected__palette');
+}

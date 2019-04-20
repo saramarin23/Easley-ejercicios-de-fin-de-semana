@@ -48,8 +48,16 @@ body {
 
 /* EJERCICIO 5 */
 
+.palettes {
+  margin: 0 auto;
+  padding: 40px;
+  width: 640px;
+  text-align: center;
+}
 .palette__container{
+  padding: 10px;
   list-style: none;
+  margin: 5px;
 }
 .palette__name{
   font-family: "Lucida Console", Monaco, monospace;
@@ -61,4 +69,11 @@ body {
   height: 100px;
   width: 100px;
   box-shadow: -1px 3px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* EJERCICIO 7 */
+
+.selected__palette{
+  background-color: #a2e8c6;
+  border-radius: 10px;
 }
