@@ -60,3 +60,14 @@ h1 {
   height: 100px;
   width: 100px;
 }
+
+.spaceship-colors {
+  list-style: none;
+  padding-left: 0;
+}
+
+.spaceship-colors__container {
+  list-style: none;
+  display: flex;
+  padding-left: 0;
+}

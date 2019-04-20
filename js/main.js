@@ -1,8 +1,8 @@
 'use strict';
 
 const news = document.querySelector('.news');
-// const palette = document.querySelector('.palette');
 const paletteSpaceShip = document.querySelector('.palette-space-ship');
+const allPalettes = document.querySelector('.spaceship-colors');
 
 const data = [
   {
@@ -110,7 +110,7 @@ const paintPalette = (colors) => {
     listColor.setAttribute('style', `background-color:#${color}`);
     listColors.appendChild(listColor);
   }
-}
+};
 
 const getColors = () => {
   fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palette.json')
@@ -118,10 +118,52 @@ const getColors = () => {
     .then(data => {
       const palettes = data.palettes;
       const color = palettes[0].colors;
-      console.log(palettes);
-      console.log(palettes[0].colors);
       paintPalette(color);
     });
 };
 
 getColors();
+
+
+// EJERCICIO 6
+
+function createColors(colorsArr, parent){
+  for (let i = 0; i < colorsArr.length; i++) {
+    const oneColor = document.createElement('li');
+    oneColor.classList.add('color__item');
+    oneColor.setAttribute('style', `background-color:#${colorsArr[i]}`);
+    parent.appendChild(oneColor);
+  }
+}
+
+const getAllSpaceShipColors = () => {
+  fetch ('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palettes.json')
+    .then(response => response.json())
+    .then(data => {
+      for (let i = 0; i < data.palettes.length; i++) {
+        console.log(data.palettes[i]);
+        //creo LI para el UL que tengo en el HTML
+        const newLi = document.createElement('li');
+        newLi.classList.add('spaceship-colors__item');
+        allPalettes.appendChild(newLi);
+
+        //añado contenido a los LI con un h2 con el nombre de las naves
+        const liTitle = document.createElement('h2');
+        const liTitleContent = document.createTextNode(data.palettes[i].name);
+        liTitle.appendChild(liTitleContent);
+        newLi.appendChild(liTitle);
+
+        //creo nuevo UL para meter dentro de los LI para organizar los colores
+        const newUl = document.createElement('ul');
+        newUl.classList.add('spaceship-colors__container');
+        newLi.appendChild(newUl);
+
+        //añado array de colores a los LI mediante una función porque si hacía aquí dentro el for, no funcionaba
+        const colorsArr = data.palettes[i].colors;
+        createColors(colorsArr, newUl);
+      }
+  })
+};
+
+getAllSpaceShipColors();
+
