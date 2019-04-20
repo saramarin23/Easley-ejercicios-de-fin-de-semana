@@ -25,15 +25,19 @@ const data = [
 ];
 
 const getListFromAPI = () => {
-  let dataResults = [];
-
   fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/news.json')
-  .then (response => response.json())
-  .then(data => {
-    dataResults = data;
-  });
-  return dataResults;
-  //tengo que obtener una lista (DataAPI)
+    .then(response => response.json())
+    .then(data => {
+      const resultArr = createNewsInDOM(data.news);
+      martianClassAddition(resultArr);
+      
+      //4. Add class 'news__item--no-image-visible' to all li elements and toggle functionality
+      addHideClass(resultArr);
+
+      for (let item of resultArr) {
+        item.addEventListener('click', hideImage);
+      }
+    });
 }
 
 const createNewsInDOM = arrayOfObjects => {
@@ -86,18 +90,12 @@ const hideImage = event => {
   event.currentTarget.classList.toggle('news__item--no-image-visible');
 }
 
-//Get list of news from API
-const dataAPI = getListFromAPI();
+//3. Get list of news from API
+getListFromAPI();
 
-//Create DOM
-const resultArr = createNewsInDOM(data);
+//1. Create DOM
+// const resultArr = createNewsInDOM(data);
 
-//Look for word "mars" or "martian" in titles and put new class 'news__item--from-mars' on parents of titles (li elements)
-martianClassAddition(resultArr);
+//2. Look for word "mars" or "martian" in titles and put new class 'news__item--from-mars' on parents of titles (li elements)
+// martianClassAddition(resultArr);
 
-//Add class 'news__item--no-image-visible' to all li elements and toggle functionality
-addHideClass(resultArr);
-
-for (let item of resultArr) {
-  item.addEventListener('click', hideImage);
-}
