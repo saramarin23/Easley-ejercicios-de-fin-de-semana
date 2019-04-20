@@ -68,18 +68,14 @@ const divContainer = document.querySelector('.palette');
 //     }
 //     return console.log(data.news);
 //   });
-
-  fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palettes.json')
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {
-    const ships = data.palettes;
-
-    for (let ship of ships){
-    
+const savedData = JSON.parse(localStorage.getItem('data'));
+function createShips(data) {
+  const ships = data.palettes;
+  for (let ship of ships) {
     const dataColors = ship.colors;
     const dataName = ship.name;
+    localStorage.setItem('data', JSON.stringify(data));
+    
     const shipDiv = document.createElement('div')
     const shipName = document.createElement('h1');
     const newName = document.createTextNode(dataName);
@@ -89,37 +85,52 @@ const divContainer = document.querySelector('.palette');
     shipDiv.appendChild(shipName);
     divContainer.appendChild(shipDiv);
 
-    for (let color of dataColors){
+    for (let color of dataColors) {
       const newColor = document.createElement('div');
       newColor.classList.add('color');
-      newColor.setAttribute('style',`background-color:#${color}`);
+      newColor.setAttribute('style', `background-color:#${color}`);
       shipDiv.appendChild(newColor);
-    } 
     }
-    const shipDiv = document.querySelectorAll('.ship');
-    for (let ship of shipDiv)
+  }
+}
+function likeShip() {
+  const shipDiv = document.querySelectorAll('.ship');
+  for (let ship of shipDiv)
     ship.addEventListener('click', handleShipClick);
-    function handleShipClick(event){
+  function handleShipClick(event) {
     const shipElement = event.currentTarget;
     shipElement.classList.toggle('like');
-    }
-    const shipNames = document.querySelectorAll('.ship-name');
-    const inputEl = document.querySelector('.search');
-    function handleInputKey(){
-      for (let ship of shipNames){
-        if (ship.innerHTML.includes(inputEl.value)){
-          ship.parentElement.classList.remove('hidden');
-        } 
-        else {
-          ship.parentElement.classList.add('hidden');
-        }
+  }
+}
+function searchShip() {
+  const shipNames = document.querySelectorAll('.ship-name');
+  const inputEl = document.querySelector('.search');
+  function handleInputKey() {
+    for (let ship of shipNames) {
+      if (ship.innerHTML.includes(inputEl.value)) {
+        ship.parentElement.classList.remove('hidden');
       }
-      
+      else {
+        ship.parentElement.classList.add('hidden');
+      }
     }
+  }
   inputEl.addEventListener('keyup', handleInputKey);
+}
+if (savedData){
+    createShips(savedData);
+    likeShip();
+    searchShip();
+}
+else {
+fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palettes.json')
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+
+    createShips(data);
+    likeShip();
+    searchShip();
   });
-
- 
-
-
-
+}
