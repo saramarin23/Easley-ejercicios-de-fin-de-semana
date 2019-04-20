@@ -54,3 +54,11 @@ body {
 .selected {
   border : 2px solid red;
 }
+
+.hidden {
+  display: none;
+}
+.filterInput {
+  margin: 20px;
+  font-size: 18px;
+}

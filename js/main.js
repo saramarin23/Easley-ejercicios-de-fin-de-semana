@@ -87,7 +87,6 @@ function createPalettes(container, palettes) {
       container.appendChild(wrapper);
     }
     wrapper.addEventListener('click', function(){wrapper.classList.toggle('selected');});
-
   }
 }
 
@@ -107,4 +106,25 @@ fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-sema
     const morePalettes = document.querySelector('.more__palettes');
     createPalettes(morePalettes, data.palettes);
   });
+
+// ejercicio 8
+
+const input = document.querySelector('.input');
+
+function filterItems () {
+  const wrappers = document.querySelectorAll('.wrapper');
+
+  for (const wrapper of wrappers) {
+    const title = wrapper.firstChild;
+    const titleText = title.innerHTML.toUpperCase();
+    const inputValue = input.value.toUpperCase();
+    if (!(titleText.includes(inputValue))){
+      wrapper.classList.add('hidden');
+    }else {
+      wrapper.classList.remove('hidden');
+    }
+  }
+}
+
+input.addEventListener('keyup', filterItems);
 
