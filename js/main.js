@@ -87,6 +87,8 @@ function secondPalette (urlToFetch) {
       newInput.type = 'checkbox';
       newPaletteRow.appendChild (newInput);
 
+      newInput.addEventListener('click', selectedItem);
+
       const newPaletteText = document.createTextNode (palette.name);
       newPaletteRow.appendChild (newPaletteText);
 
@@ -107,3 +109,8 @@ function secondPalette (urlToFetch) {
 }
 
 secondPalette (secondUrlPalette);
+
+function selectedItem(event) {
+  const selected = event.currentTarget;
+  selected.classList.toggle('selected__item');
+}
