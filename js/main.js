@@ -9,6 +9,7 @@ const urlData =
 const newsList = document.querySelector ('.news');
 const paletteList = document.querySelector ('.palettes');
 const newPaletteList = document.querySelector ('.new__palettes');
+const searchInput = document.querySelector ('.search');
 
 function fetchData (url) {
   fetch (url).then (response => response.json ()).then (dataAll => {
@@ -87,7 +88,7 @@ function secondPalette (urlToFetch) {
       newInput.type = 'checkbox';
       newPaletteRow.appendChild (newInput);
 
-      newInput.addEventListener('click', selectedItem);
+      newInput.addEventListener ('click', selectedItem);
 
       const newPaletteText = document.createTextNode (palette.name);
       newPaletteRow.appendChild (newPaletteText);
@@ -110,7 +111,23 @@ function secondPalette (urlToFetch) {
 
 secondPalette (secondUrlPalette);
 
-function selectedItem(event) {
+function selectedItem (event) {
   const selected = event.currentTarget.parentElement;
-  selected.classList.toggle('selected__item');
+  selected.classList.toggle ('selected__item');
 }
+
+function searchItem (event) {
+  const searchText = event.currentTarget.value;
+  fetch (secondUrlPalette).then (response => response.json ()).then (data => {
+    const dataInfo = data.palettes;
+    for (const data of dataInfo) {
+      if (data.name.includes(searchText) === true) {
+        console.log(`Estás buscando: ${searchText}`);
+        console.log(data.name);
+      }
+
+    }
+  });
+}
+
+searchInput.addEventListener ('keyup', searchItem);
