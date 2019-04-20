@@ -2,6 +2,7 @@
 
 const list = document.querySelector('.news');
 const palettes = document.querySelector('.palettes');
+const urlPalette1 = 'https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palette.json';
 const data = [
   {
     title: 'Asteroids 101',
@@ -40,8 +41,7 @@ const getListFromAPI = () => {
       }
 
       //5. Add first palette (to get from API)
-      const resultPAlette = fetchPaletteFromAPI();
-      // paintPalette(resultPAlette);
+      fetchPaletteFromAPI(urlPalette1);
     });
 }
 
@@ -95,13 +95,45 @@ const hideImage = event => {
   event.currentTarget.classList.toggle('news__item--no-image-visible');
 }
 
-const fetchPaletteFromAPI = () => {
-  fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palette.json')
+const fetchPaletteFromAPI = (url) => {
+  fetch(url)
   .then(response => response.json())
   .then(data => {
     const arrObjs = data.palettes;
     for (let i = 0; i < arrObjs.length; i++) {
-      console.log(arrObjs[i].colors)
+      //DIV CONTAINER OF PALETTE
+      const divContainer = document.createElement('div');
+      divContainer.classList.add('palette');
+
+      //NAME OF PALETTE
+      //---Container
+      let namePalette = arrObjs[i].name;
+      const nameItem = document.createElement('h3');
+      nameItem.classList.add('name__palette');
+      //---Content
+      const nameContent = document.createTextNode(namePalette);
+      //---Appenchild
+      nameItem.appendChild(nameContent);
+
+      //DIV CONTAINER OF COLORS
+      const colorsDiv = document.createElement('div');
+      colorsDiv.classList.add('color__palette');
+
+      //COLORS OF PALETTE
+      let colorsPalette = arrObjs[i].colors;
+      for (let color of colorsPalette) {
+        //---Container
+        const colorItem = document.createElement('div');
+        colorItem.classList.add('color__item');
+        colorItem.style = `background-color:#${color}`;
+        //---Appenchild
+        colorsDiv.appendChild(colorItem);
+      }
+
+      //APPENCHILD
+      palettes.appendChild(divContainer);
+      divContainer.appendChild(nameItem);
+      divContainer.appendChild(colorsDiv);
     }
   });
 }

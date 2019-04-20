@@ -21,3 +21,28 @@
 .news__item--no-image-visible .news__image {
   display: none;
 }
+.palettes {
+  display: flex;
+}
+.palette {
+  background-color: #EDEDED;
+  height: 200px;
+  width: 450px;
+  cursor: pointer;
+}
+.name__palette {
+  font-family: sans-serif;
+  font-style: italic;
+  font-size: 20px;
+  position: relative;
+  top: 15px;
+  left: 50px;
+}
+.color__palette {
+  display: flex;
+  justify-content: center;
+}
+.color__item {
+  height: 70px;
+  width: 70px;
+}
