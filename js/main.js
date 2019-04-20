@@ -79,66 +79,91 @@
 //   }
 // }
 
-// EJERCICIO 03
-//Redo the exercise using the API 'https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/news.json'
-fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/news.json')
-  .then(function(response){
-    return response.json();
-  })
-  .then(function(responseParsed){
-    // console.log(responseParsed);
-    const newsArray = responseParsed.news;
-    console.log(newsArray);
-
+function paintNews(x) {
     const newsList = document.querySelector('.news');
 
-    for (const news of newsArray){
-      //Equals to
-      // const title = news.title;
-      const {title} = news;
-      // const image = news.image;
-      const {image} = news;
+    for (const news of x) {
+        //Equals to
+        // const title = news.title;
+        const { title } = news;
+        // const image = news.image;
+        const { image } = news;
 
-      const newItemEl = document.createElement('li');
-      newItemEl.classList.add('news__item');
+        const newItemEl = document.createElement('li');
+        newItemEl.classList.add('news__item');
 
-      const newH2El = document.createElement('h2');
-      newH2El.classList.add('news__title');
-      newItemEl.append(newH2El);
+        //EXERCISE 04
+        newItemEl.classList.add('news__item--no-image-visible');
 
-      const newImgEl = document.createElement('img');
-      newImgEl.classList.add('news__image');
-      newItemEl.append(newImgEl);
+        const newH2El = document.createElement('h2');
+        newH2El.classList.add('news__title');
+        newItemEl.append(newH2El);
 
-      const titleContent = document.createTextNode(title);
+        const newImgEl = document.createElement('img');
+        newImgEl.classList.add('news__image');
+        newItemEl.append(newImgEl);
 
-      //Appends the elements to their content
-      newH2El.appendChild(titleContent);
-      newImgEl.setAttribute('src', image);
-      newImgEl.setAttribute('alt', title);
+        const titleContent = document.createTextNode(title);
 
-      //Append each item to the main list
-      newsList.appendChild(newItemEl);
+        //Appends the elements to their content
+        newH2El.appendChild(titleContent);
+        newImgEl.setAttribute('src', image);
+        newImgEl.setAttribute('alt', title);
+
+        //Append each item to the main list
+        newsList.appendChild(newItemEl);
     }
+}
 
+function paintMartians() {
     //Get all li elements (array)
     const itemsArr = document.querySelectorAll('.news__item');
 
     //Iterate over the array
-    for (const myItem of itemsArr){
-      //Aply class '.news__item--from-mars' to li if matching a condition: its title contains "Mars" or "Martian"
+    for (const myItem of itemsArr) {
+        //Aply class '.news__item--from-mars' to li if matching a condition: its title contains "Mars" or "Martian"
 
-      //Get title content
-      // const titleEl = myItem.childNodes[0];
-      const titleEl = myItem.querySelector('.news__title');
-      const titleContent = titleEl.innerHTML;
+        //Get title content
+        // const titleEl = myItem.childNodes[0];
+        const titleEl = myItem.querySelector('.news__title');
+        const titleContent = titleEl.innerHTML;
 
-      // Conditions that will return a true/false
-      const containsMars = titleContent.includes("Mars");
-      const containsMartian = titleContent.includes("Martian");
+        // Conditions that will return a true/false
+        const containsMars = titleContent.includes('Mars');
+        const containsMartian = titleContent.includes('Martian');
 
-      if(containsMars || containsMartian){
-        myItem.classList.add('news__item--from-mars');
-      }
+        if (containsMars || containsMartian) {
+            myItem.classList.add('news__item--from-mars');
+        }
     }
-  })
+}
+
+// EJERCICIO 04
+function toggleVisibility() {
+    const itemsArr = document.querySelectorAll('.news__item');
+
+    for (const element of itemsArr) {
+        element.addEventListener('click', handlerToggleVisibility);
+    }
+
+    function handlerToggleVisibility(event) {
+        const itemSelected = event.currentTarget;
+        itemSelected.classList.toggle('news__item--no-image-visible');
+    }
+}
+// EJERCICIO 03
+//Redo the exercise using the API 'https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/news.json'
+fetch(
+    'https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/news.json'
+)
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(responseParsed) {
+        // console.log(responseParsed);
+        const newsArray = responseParsed.news;
+
+        paintNews(newsArray);
+        paintMartians();
+        toggleVisibility();
+    });
