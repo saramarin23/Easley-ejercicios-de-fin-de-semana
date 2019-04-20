@@ -86,6 +86,8 @@ function createPalettes(container, palettes) {
       div.style.backgroundColor = `#${color}`;
       container.appendChild(wrapper);
     }
+    wrapper.addEventListener('click', function(){wrapper.classList.toggle('selected');});
+
   }
 }
 
@@ -94,7 +96,7 @@ fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-sema
   .then(response => response.json())
   .then(data => {
     const palette = document.querySelector('.palette');
-    createPalettes(palette, data.palettes);    
+    createPalettes(palette, data.palettes);
   });
 
 //ejercicio 6
@@ -103,5 +105,6 @@ fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-sema
   .then(response => response.json())
   .then(data => {
     const morePalettes = document.querySelector('.more__palettes');
-    createPalettes(morePalettes, data.palettes);    
+    createPalettes(morePalettes, data.palettes);
   });
+

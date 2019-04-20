@@ -2,6 +2,7 @@ body {
   background: #fffdfa;
   color: #332100;
   margin: 0;
+  padding: 20px;
 }
 
 .news {
@@ -45,11 +46,11 @@ body {
   display: none;
 }
 
-.palette {
-  padding-left: 20px;
-}
 .color__item {
   display: inline-block;
   height: 100px;
   width: 100px;
+}
+.selected {
+  border : 2px solid red;
 }
