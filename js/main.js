@@ -81,9 +81,11 @@ const fetchNews = () => {
 
 fetchNews();
 
+
 const showPic = () => {
   event.currentTarget.classList.toggle('news__item--no-image-visible');
 };
+
 
 const paintPalette = (colors) => {
   // creo elementos
@@ -147,6 +149,8 @@ const getAllSpaceShipColors = () => {
         newLi.classList.add('spaceship-colors__item');
         allPalettes.appendChild(newLi);
 
+        newLi.addEventListener('click', selectedPalette);
+
         //añado contenido a los LI con un h2 con el nombre de las naves
         const liTitle = document.createElement('h2');
         const liTitleContent = document.createTextNode(data.palettes[i].name);
@@ -167,3 +171,8 @@ const getAllSpaceShipColors = () => {
 
 getAllSpaceShipColors();
 
+//EJERCICIO 7
+
+function selectedPalette() {
+  event.currentTarget.classList.toggle('selected__palette');
+}

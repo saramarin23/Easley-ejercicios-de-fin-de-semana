@@ -71,3 +71,7 @@ h1 {
   display: flex;
   padding-left: 0;
 }
+
+.selected__palette {
+  border: dotted 3px darkred;
+}
