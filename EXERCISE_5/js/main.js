@@ -41,7 +41,7 @@ const getListFromAPI = () => {
 
       //5. Add first palette (to get from API)
       const resultPAlette = fetchPaletteFromAPI();
-      paintPalette(resultPAlette);
+      // paintPalette(resultPAlette);
     });
 }
 
@@ -96,7 +96,14 @@ const hideImage = event => {
 }
 
 const fetchPaletteFromAPI = () => {
-
+  fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palette.json')
+  .then(response => response.json())
+  .then(data => {
+    const arrObjs = data.palettes;
+    for (let i = 0; i < arrObjs.length; i++) {
+      console.log(arrObjs[i].colors)
+    }
+  });
 }
 
 //3. Get list of news from API
