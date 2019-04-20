@@ -26,6 +26,9 @@
   flex-wrap: wrap;
 }
 .palette {
+  display: none;
+}
+.palette__visible {
   background-color: #EDEDED;
   height: 200px;
   width: 450px;

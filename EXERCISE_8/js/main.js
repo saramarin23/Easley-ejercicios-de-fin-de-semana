@@ -157,16 +157,24 @@ const fetchPaletteFromAPI = (url) => {
 
       //7. Add class for palette selected
       divContainer.addEventListener('click', addClassToPalette);
+      
+      //8. Filter each time a letter is written in input
+      const shipSearcher = () => {
+        parent = nameItem.parentElement;
+        if (input.value === '') {
+          parent.classList.remove('palette__visible');
+          parent.classList.add('palette');
+        } else if (nameItem.innerHTML.includes(input.value)) {
+          parent.classList.remove('palette');
+          parent.classList.add('palette__visible');
+        } else {
+          parent.classList.remove('palette__visible');
+          parent.classList.add('palette');
+        }
+      }
+      input.addEventListener('keyup', shipSearcher);
     }
   });
-}
-
-const shipSearcher = () => {
-  const inputValue = input.value;
-  if (nameContent.includes(inputValue)) {
-    console.log('hola');
-    //parent añadir clase visible
-  }
 }
 
 //3. Get list of news from API
@@ -178,5 +186,3 @@ getListFromAPI();
 //2. Look for word "mars" or "martian" in titles and put new class 'news__item--from-mars' on parents of titles (li elements)
 // martianClassAddition(resultArr);
 
-//8. Filtrar cada vez que se escriba una letra en el input
-input.addEventListener('keyup', shipSearcher);
