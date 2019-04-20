@@ -1,6 +1,8 @@
 'use strict';
 
 const news = document.querySelector('.news');
+const urlData =
+  'https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/news.json';
 const data = [
   {
     title: 'Asteroids 101',
@@ -25,7 +27,7 @@ const data = [
 ];
 
 // Ejercicio 1 - Listado de noticias
-for (let i = 0; i < data.length; i++) {
+/*for (let i = 0; i < data.length; i++) {
   const newItem = document.createElement('li');
   newItem.classList.add('news__item');
   const subtitle = document.createElement('h2');
@@ -44,7 +46,7 @@ for (let i = 0; i < data.length; i++) {
   newItem.appendChild(subtitle);
   newItem.appendChild(image);
   news.appendChild(newItem);
-}
+};*/
 
 // Ejercicio 2 - Marte, el planeta rojo
 const mars = () => {
@@ -57,4 +59,36 @@ const mars = () => {
   }
 };
 
-mars();
+//mars();
+
+// Ejercicio 3 - En el espacio nadie puede oir tus fetchs
+const fetchData = url => {
+  fetch(url)
+    .then(response => response.json())
+    .then(dataNews => {
+      const data = dataNews.news;
+      for (let i = 0; i < data.length; i++) {
+        const newItem = document.createElement('li');
+        newItem.classList.add('news__item');
+        const subtitle = document.createElement('h2');
+        subtitle.classList.add('news__title');
+        const image = document.createElement('img');
+        image.classList.add('news__image');
+        image.setAttribute('src', data[i].image);
+        image.setAttribute('alt', data[i].title);
+
+        const newContentTitle = document.createTextNode(data[i].title);
+        const newContentImage = document.createTextNode(data[i].image);
+
+        subtitle.appendChild(newContentTitle);
+        image.appendChild(newContentImage);
+
+        newItem.appendChild(subtitle);
+        newItem.appendChild(image);
+        news.appendChild(newItem);
+      }
+      mars();
+    });
+};
+
+fetchData(urlData);
