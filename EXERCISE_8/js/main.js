@@ -160,11 +160,17 @@ const fetchPaletteFromAPI = (url) => {
       
       //8. Filter each time a letter is written in input
       const shipSearcher = () => {
-        parent = nameItem.parentElement;
-        if (input.value === '') {
+        const nameLower = nameItem.innerHTML.toLowerCase();
+        const movieLower = movieName.innerHTML.toLowerCase();
+        const inputValue = input.value.toLowerCase();
+        const parent = nameItem.parentElement;
+        if (inputValue === '') {
           parent.classList.remove('palette__visible');
           parent.classList.add('palette');
-        } else if (nameItem.innerHTML.includes(input.value)) {
+        } else if (inputValue === 'all') {
+          parent.classList.remove('palette');
+          parent.classList.add('palette__visible');
+        } else if (nameLower.includes(inputValue) || movieLower.includes(inputValue)) {
           parent.classList.remove('palette');
           parent.classList.add('palette__visible');
         } else {
