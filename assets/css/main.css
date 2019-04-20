@@ -59,6 +59,7 @@ h1 {
 .color__item {
   height: 100px;
   width: 100px;
+  margin-bottom: 50px;
 }
 
 .spaceship-colors {
@@ -74,4 +75,12 @@ h1 {
 
 .selected__palette {
   border: dotted 3px darkred;
+}
+
+.input__search__label {
+  font-size: 18px;
+}
+
+.hidden {
+  display: none;
 }
