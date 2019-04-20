@@ -26,35 +26,42 @@ const container =  document.querySelector('.colors');
 //06.El retorno de las paletas
 //Ahora que sabemos pintar paletas vamos a ver las paletas de las mejores naves de ciencia ficción, en esta URL https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palettes.json tenemos a las mejores: ¡¡¡Píntalas todas!!
 
-fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palettes.json')
-  .then(response => response.json())
-  .then(colorsData => {
-    console.log(colorsData);
-    const palObject = colorsData.palettes;
-    console.log(palObject);
+function getDataFromUrl(){
+  fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palettes.json')
+    .then(response => response.json())
+    .then(colorsData => {
+      console.log(colorsData);
+      localStorage.setItem('fetchData', JSON.stringify(colorsData));
+      renderPageWithData(colorsData);
+    });
+}
 
-    for(let i = 0; i < palObject.length; i++){
-      console.log(palObject[i]);
+function renderPageWithData(colorsData){
+  const palObject = colorsData.palettes;
+  console.log(palObject);
 
-      const list = document.createElement('li');
-      list.setAttribute('class', 'item');
-      container.appendChild(list);
+  for(let i = 0; i < palObject.length; i++){
+    console.log(palObject[i]);
 
-      const title = document.createElement('h1');
-      title.innerHTML = palObject[i].name;
-      list.appendChild(title);
+    const list = document.createElement('li');
+    list.setAttribute('class', 'item');
+    container.appendChild(list);
 
-      const subtitle = document.createElement('h2');
-      subtitle.innerHTML = palObject[i].from;
-      list.appendChild(subtitle);
+    const title = document.createElement('h1');
+    title.innerHTML = palObject[i].name;
+    list.appendChild(title);
 
-      const colorArr = palObject[i].colors;
-      createColors(colorArr, list);
-    }
-    const palettes = document.querySelectorAll('.item');
-    handlerClick(palettes);
+    const subtitle = document.createElement('h2');
+    subtitle.innerHTML = palObject[i].from;
+    list.appendChild(subtitle);
 
-  });
+    const colorArr = palObject[i].colors;
+    createColors(colorArr, list);
+  }
+  const palettes = document.querySelectorAll('.item');
+  handlerClick(palettes);
+
+}
 
 function createColors(colorArr, parent){
   for (let i = 0; i < colorArr.length; i++) {
@@ -92,7 +99,7 @@ function search(){
   const palArr = document.querySelectorAll('.item');
   for(let i = 0; i < palArr.length; i++){
     const title = palArr[i].querySelector('h1').innerHTML;
-    
+
     if(!title.includes(searchValue)){
       palArr[i].classList.add('hidden');
     }else{
@@ -101,3 +108,24 @@ function search(){
   }
 }
 inputEl.addEventListener('keyup', handlerKey);
+
+//9.Caches a mí
+//Estamos haciendo muchas peticiones al servidor cada vez que alguien visita la web. Y hemos visto que muchas veces es una usuaria que ya la visitó antes. Vamos a cachear la respuesta de nuestro fetch en localStorage. La idea es que al cargar la página podamos consultar el LS, si ya están las paletas guardadas las pintamos directamente y nos ahorramos una petición. Sino hacemos nuestro fetch ;)
+
+function reloadPage(){
+  if(!getLocalStorage()){
+    getDataFromUrl();
+    console.log('estoy en el if');
+
+  }else{
+    console.log('estoy en el else');
+    const colorsDataFromCache = getLocalStorage();
+    renderPageWithData(colorsDataFromCache);
+  }
+}
+
+function getLocalStorage(){
+  const cache = localStorage.getItem('fetchData');
+  return JSON.parse(cache);
+}
+reloadPage();
