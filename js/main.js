@@ -29,26 +29,34 @@ function selectPalette (event) {
   event.currentTarget.classList.toggle('selected__palette');
 }
 
-fetch ('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palettes.json')
-  .then(response => response.json())
-  .then(function(data){
-    const {palettes} = data;
-    for (const ship of palettes){
-      createPalette(ship);
-    }
-    function searchShip (){
-      const searchText = inputEl.value;
-      const palettesUlEl = document.querySelector('.palettes');
-      palettesUlEl.innerHTML = '';
-      for (const ship of palettes) {
-        const search = searchText.toLowerCase();
-        const shipName = ship.name.toLowerCase();
-        if(shipName.includes(search)){
-          createPalette(ship);
-        }
+if (localStorage.getItem('palettes')){
+  const palettes = JSON.parse(localStorage.getItem('palettes'));
+  for (const ship of palettes){
+    createPalette(ship);
+  }
+}else {
+  fetch ('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palettes.json')
+    .then(response => response.json())
+    .then(function(data){
+      const {palettes} = data;
+      localStorage.setItem('palettes',JSON.stringify(palettes));
+      for (const ship of palettes){
+        createPalette(ship);
       }
+      function searchShip (){
+        const searchText = inputEl.value;
+        const palettesUlEl = document.querySelector('.palettes');
+        palettesUlEl.innerHTML = '';
+        for (const ship of palettes) {
+          const search = searchText.toLowerCase();
+          const shipName = ship.name.toLowerCase();
+          if(shipName.includes(search)){
+            createPalette(ship);
+          }
+        }
+        addListenersToPaletteContainers();
+      }
+      inputEl.addEventListener('keyup', searchShip);
       addListenersToPaletteContainers();
-    }
-    inputEl.addEventListener('keyup', searchShip);
-    addListenersToPaletteContainers();
-  });
+    });
+}
