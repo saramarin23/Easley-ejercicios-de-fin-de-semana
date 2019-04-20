@@ -40,8 +40,10 @@ function addHtml() {
     const newsTitleContent = document.createTextNode(news.title);
     const newsImage = document.createElement('img');
     newsItem.classList.add('news__item');
+    newsItem.addEventListener('click',showOrHide);
     newsTitle.classList.add('news__title');
     newsImage.classList.add('news__image');
+    newsImage.classList.add('news__item--no-image-visible');
     listEl.appendChild(newsItem);
     newsItem.appendChild(newsTitle);
     newsItem.appendChild(newsImage);
@@ -62,3 +64,8 @@ function addTitleStyles() {
 }
 
 
+function showOrHide(event){
+  const el=event.currentTarget;
+  const img=el.querySelector('.news__image');
+  img.classList.toggle('news__item--no-image-visible');
+}
