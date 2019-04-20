@@ -41,3 +41,18 @@ for (let listElement of data){
   newItem.appendChild(newTitle);
   newItem.appendChild(newImg);
 }
+
+const newsItem = document.querySelectorAll('.news__item');
+
+for (let item of newsItem){
+  const newsTitle = item.firstChild;
+  const titleContent = newsTitle.innerHTML;
+  if (titleContent.includes('Mars') || titleContent.includes('Martians')){
+    item.classList.add('news__item--from-mars');
+    console.log('hola');
+  }
+  else {
+  }
+}
+
+
