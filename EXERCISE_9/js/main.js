@@ -32,16 +32,11 @@ const savedNews = JSON.parse(localStorage.getItem('newsLS'));
 
 const saveInLS = () => {
   if (savedNews === null) {
+    console.log('vacio')
     getListFromAPI();
   } else {
-    const resultArr = createNewsInDOM(savedNews);
-    martianClassAddition(resultArr);
-    addHideClass(resultArr);
-    for (let item of resultArr) {
-      item.addEventListener('click', hideImage);
-    }
-    fetchPaletteFromAPI(urlPalette2);
-    fetchPaletteFromAPI(urlPalette1);
+    console.log('lleno')
+    DOMFunctionsWrapper(savedNews);
   }
 }
 
@@ -50,22 +45,26 @@ const getListFromAPI = () => {
     .then(response => response.json())
     .then(data => {
       localStorage.setItem('newsLS', JSON.stringify(data.news));
-      const resultArr = createNewsInDOM(data.news);
-      martianClassAddition(resultArr);
-
-      //4. Add class 'news__item--no-image-visible' to all li elements and toggle functionality
-      addHideClass(resultArr);
-
-      for (let item of resultArr) {
-        item.addEventListener('click', hideImage);
-      }
-
-      //6. Add first palette (to get from API)
-      fetchPaletteFromAPI(urlPalette2);
-
-      //5. Add first palette (to get from API)
-      fetchPaletteFromAPI(urlPalette1);
+      DOMFunctionsWrapper(data.news);
     });
+}
+
+const DOMFunctionsWrapper = arr => {
+  const resultArr = createNewsInDOM(arr);
+  martianClassAddition(resultArr);
+
+  //4. Add class 'news__item--no-image-visible' to all li elements and toggle functionality
+  addHideClass(resultArr);
+
+  for (let item of resultArr) {
+    item.addEventListener('click', hideImage);
+  }
+
+  //6. Add first palette (to get from API)
+  fetchPaletteFromAPI(urlPalette2);
+
+  //5. Add first palette (to get from API)
+  fetchPaletteFromAPI(urlPalette1);
 }
 
 const createNewsInDOM = arrayOfObjects => {
