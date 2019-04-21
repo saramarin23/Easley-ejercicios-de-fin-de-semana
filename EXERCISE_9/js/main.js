@@ -29,7 +29,8 @@ const data = [
 ];
 
 const savedNews = JSON.parse(localStorage.getItem('newsLS'));
-const savedMovies = JSON.parse(localStorage.getItem('moviesLS'));
+const savedMoviesLong = JSON.parse(localStorage.getItem('movies2LS'));
+const savedMoviesShort = JSON.parse(localStorage.getItem('movies1LS'));
 
 const saveInLS = () => {
   if (savedNews === null) {
@@ -60,7 +61,8 @@ const DOMFunctionsWrapper = arr => {
   }
 
   //9.2 Save data from APIS in LS
-  saveMoviesInLS();
+  saveMoviesInLS(savedMoviesLong, urlPalette2, 'movies2LS');
+  saveMoviesInLS(savedMoviesShort, urlPalette1, 'movies1LS');
 
   // //6. Add first palette (to get from API)
   // fetchPaletteFromAPI(urlPalette2);
@@ -123,22 +125,19 @@ const addClassToPalette = (event) => {
   event.currentTarget.classList.toggle('palette__active');
 }
 
-const saveMoviesInLS = () => {
-  if (savedMovies === null) {
-    console.log('vacio')
-    fetchPaletteFromAPI(urlPalette2);
-    fetchPaletteFromAPI(urlPalette1);    
+const saveMoviesInLS = (moviesLS, moviesURL, nameLS) => {
+  if (moviesLS === null) {
+    fetchPaletteFromAPI(moviesURL, nameLS);
   } else {
-    console.log('lleno')
-    paintPalettes(savedMovies);
+    paintPalettes(moviesLS);
   }
 }
 
-const fetchPaletteFromAPI = (url) => {
+const fetchPaletteFromAPI = (url, nameLS) => {
   fetch(url)
     .then(response => response.json())
     .then(data => {
-      localStorage.setItem('moviesLS', JSON.stringify(data.palettes));
+      localStorage.setItem(nameLS, JSON.stringify(data.palettes));
       paintPalettes(data.palettes);
     });
 }
