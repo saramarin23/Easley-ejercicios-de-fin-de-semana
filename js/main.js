@@ -156,6 +156,7 @@ const fetchPalettes = url => {
         );
 
         titlePalette.appendChild(titlePaletteContent);
+        addCircle(titlePalette);
 
         const colors = data.palettes[i].colors;
         for (const color of colors) {
@@ -174,3 +175,18 @@ const fetchPalettes = url => {
 };
 
 fetchPalettes(urlPalettes);
+
+// Ejercicio 7 - Mis paletas preferidas
+function addCircle(element) {
+  const circle = document.createElement('div');
+  circle.classList.add('selected', 'circle');
+  circle.addEventListener('click', () => {
+    toggleCircle(circle);
+  });
+  element.appendChild(circle);
+}
+
+function toggleCircle(element) {
+  element.classList.toggle('circle');
+  element.classList.toggle('circle-selected');
+}

@@ -54,6 +54,7 @@ body {
 
 .title__palette {
   font-style: italic;
+  display: flex;
 }
 
 .list__color {
@@ -70,4 +71,23 @@ body {
 
 .colors__container {
   list-style: none;
+}
+
+.circle {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 5px solid #2fcb00;
+}
+
+.selected {
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+.circle-selected {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: #2fcb00;
 }
