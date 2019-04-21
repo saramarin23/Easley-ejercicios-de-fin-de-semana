@@ -2,9 +2,9 @@
 
 const urlData =
   'https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/news.json';
+const urlPalette =
+  'https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palette.json';
 
-//Listado de noticias
-//Pinta array en el html.
 
 const newsList = document.querySelector ('.news');
 const paletteList = document.querySelector ('.palettes');
@@ -64,9 +64,6 @@ function fetchData (url) {
   });
 }
 
-const urlPalette =
-  'https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palette.json';
-
 const firstPalettes = data => {
   for (const color of data) {
     const newPalette = document.createElement ('li');
@@ -76,19 +73,6 @@ const firstPalettes = data => {
   }
 };
 
-function fetchOrNot () {
-  const storageData = getStorage ('dataMartians');
-  const storageDataPalette = getStorage ('firstPalette');
-  if (storageData === true && storageDataPalette === true) {
-    firstPalettes ('dataMartians');
-    createSquares (storageData);
-    searchTitle ();
-  } else {
-    fetchData (urlData);
-    paletteFetch (urlPalette);
-  }
-}
-
 function paletteFetch (urlToFetch) {
   fetch (urlToFetch).then (response => response.json ()).then (data => {
     const colorsPalette = data.palettes[0].colors;
@@ -97,45 +81,66 @@ function paletteFetch (urlToFetch) {
   });
 }
 
+function fetchOrNot () {
+  const storageData = getStorage ('dataMartians');
+  const storageDataPalette = getStorage ('firstPalette');
+  const storageNewPalette = getStorage ('newPalette');
+  if (storageData === true && storageDataPalette === true) {
+    firstPalettes ('dataMartians');
+    createSquares (storageData);
+    searchTitle ();
+    createNewPalettes(storageNewPalette);
+  } else {
+    fetchData (urlData);
+    paletteFetch (urlPalette);
+    newPaletteFetch (secondUrlPalette);
+  }
+}
+
+
+
 const secondUrlPalette =
   'https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palettes.json';
 
-function secondPalette (urlToFetch) {
+const createNewPalettes = (newPalettes) => {
+  for (const palette of newPalettes) {
+    const newPaletteRow = document.createElement ('li');
+    newPaletteRow.setAttribute ('class', 'palette__item');
+
+    const newInput = document.createElement ('input');
+    newInput.setAttribute ('name', 'chooseTheme');
+    newInput.setAttribute ('class', 'input__palette');
+    newInput.setAttribute ('value', palette.name);
+    newInput.type = 'checkbox';
+    newPaletteRow.appendChild (newInput);
+
+    newInput.addEventListener ('click', selectedItem);
+
+    const newPaletteText = document.createTextNode (palette.name);
+    newPaletteRow.appendChild (newPaletteText);
+
+    const newListColors = document.createElement ('ul');
+    newListColors.setAttribute ('class', 'palette__item');
+
+    for (const color of palette.colors) {
+      const newPalette = document.createElement ('li');
+      newPalette.setAttribute ('class', 'color__item');
+      newPalette.style.backgroundColor = `#${color}`;
+      newListColors.appendChild (newPalette);
+    }
+
+    newPaletteRow.appendChild (newListColors);
+    newPaletteList.appendChild (newPaletteRow);
+  }
+};
+
+function newPaletteFetch (urlToFetch) {
   fetch (urlToFetch).then (response => response.json ()).then (data => {
     const newPalettes = data.palettes;
-    for (const palette of newPalettes) {
-      const newPaletteRow = document.createElement ('li');
-      newPaletteRow.setAttribute ('class', 'palette__item');
-
-      const newInput = document.createElement ('input');
-      newInput.setAttribute ('name', 'chooseTheme');
-      newInput.setAttribute ('class', 'input__palette');
-      newInput.setAttribute ('value', palette.name);
-      newInput.type = 'checkbox';
-      newPaletteRow.appendChild (newInput);
-
-      newInput.addEventListener ('click', selectedItem);
-
-      const newPaletteText = document.createTextNode (palette.name);
-      newPaletteRow.appendChild (newPaletteText);
-
-      const newListColors = document.createElement ('ul');
-      newListColors.setAttribute ('class', 'palette__item');
-
-      for (const color of palette.colors) {
-        const newPalette = document.createElement ('li');
-        newPalette.setAttribute ('class', 'color__item');
-        newPalette.style.backgroundColor = `#${color}`;
-        newListColors.appendChild (newPalette);
-      }
-
-      newPaletteRow.appendChild (newListColors);
-      newPaletteList.appendChild (newPaletteRow);
-    }
+    localStorage.setItem ('newPalette', JSON.stringify (newPalettes));
+    createNewPalettes(newPalettes);
   });
 }
-
-secondPalette (secondUrlPalette);
 
 function selectedItem (event) {
   const selected = event.currentTarget.parentElement;
@@ -159,4 +164,4 @@ function searchItem (event) {
     }
   }
 }
-// searchInput.addEventListener('keyup', searchItem);
+searchInput.addEventListener('keyup', searchItem);
