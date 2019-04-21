@@ -1,5 +1,8 @@
 'use strict';
+
+// ejercicio 1
 const list = document.querySelector('.news');
+
 const data = [
   {
     title: 'Asteroids 101',
@@ -46,3 +49,21 @@ function paintNews (arr) {
   }
 };    
 paintNews(data);
+
+// ejercicio 2
+
+function marsMartian () {
+  const titleMars = document.querySelectorAll('.news__item');
+  for (const martian of titleMars) {
+    let titleElement = martian.querySelector('.news__title').innerHTML;
+    if (titleElement.includes('Mars') || titleElement.includes('Martian')){
+      martian.classList.add('news__item--from-mars');
+    }
+  } 
+};
+marsMartian();
+
+
+
+
+
