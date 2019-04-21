@@ -11,66 +11,91 @@ const paletteList = document.querySelector ('.palettes');
 const newPaletteList = document.querySelector ('.new__palettes');
 const searchInput = document.querySelector ('.search');
 
+const toggleClass = event => {
+  const trigger = event.currentTarget;
+  trigger.classList.toggle ('news__item--no-image-visible');
+};
+
+const createSquares = array => {
+  for (let i = 0; i < array.length; i++) {
+    const newItem = document.createElement ('li');
+    newItem.setAttribute ('class', 'news__item news__item--no-image-visible');
+
+    const newTitle = document.createElement ('h2');
+    const newText = document.createTextNode (array[i].title);
+    newTitle.setAttribute ('class', 'news__title');
+    newTitle.appendChild (newText);
+
+    const newImage = document.createElement ('img');
+    newImage.src = array[i].image;
+    newImage.alt = array[i].title;
+    newImage.setAttribute ('class', 'news__image');
+
+    newItem.appendChild (newTitle);
+    newItem.appendChild (newImage);
+    newItem.addEventListener ('click', toggleClass);
+    newsList.appendChild (newItem);
+  }
+};
+
+const searchTitle = () => {
+  const titles = document.querySelectorAll ('.news__title');
+  for (let i = 0; i < titles.length; i++) {
+    const titlesText = titles[i].innerHTML;
+    if (titlesText.includes ('Martian') || titlesText.includes ('Mars')) {
+      titles[i].parentElement.classList.add ('news__item--from-mars');
+    }
+  }
+};
+
+const getStorage = objName => JSON.parse (localStorage.getItem (objName));
+
+window.addEventListener ('load', fetchOrNot);
+
 function fetchData (url) {
   fetch (url).then (response => response.json ()).then (dataAll => {
     const data = dataAll.news;
     // Crear contenido
-
-    for (let i = 0; i < data.length; i++) {
-      const newItem = document.createElement ('li');
-      newItem.setAttribute ('class', 'news__item news__item--no-image-visible');
-
-      const newTitle = document.createElement ('h2');
-      const newText = document.createTextNode (data[i].title);
-      newTitle.setAttribute ('class', 'news__title');
-      newTitle.appendChild (newText);
-
-      const newImage = document.createElement ('img');
-      newImage.src = data[i].image;
-      newImage.alt = data[i].title;
-      newImage.setAttribute ('class', 'news__image');
-
-      newItem.appendChild (newTitle);
-      newItem.appendChild (newImage);
-      newItem.addEventListener ('click', toggleClass);
-      newsList.appendChild (newItem);
-    }
-
-    //Añade clase a los elementos que contengan Martian o Mars.
-    const titles = document.querySelectorAll ('.news__title');
-    for (let i = 0; i < titles.length; i++) {
-      const titlesText = titles[i].innerHTML;
-      if (titlesText.includes ('Martian') || titlesText.includes ('Mars')) {
-        titles[i].parentElement.classList.add ('news__item--from-mars');
-      }
-    }
-
-    //Quita las imagenes
-    function toggleClass (event) {
-      const trigger = event.currentTarget;
-      trigger.classList.toggle ('news__item--no-image-visible');
-    }
+    createSquares (data);
+    //Añade Clase a los elementos que contengan Martian o Mars.
+    searchTitle ();
+    // Crea localStorage
+    localStorage.setItem ('dataMartians', JSON.stringify (data));
   });
 }
-
-fetchData (urlData);
 
 const urlPalette =
   'https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palette.json';
 
+const firstPalettes = data => {
+  for (const color of data) {
+    const newPalette = document.createElement ('li');
+    newPalette.setAttribute ('class', 'color__item');
+    newPalette.style.backgroundColor = `#${color}`;
+    paletteList.appendChild (newPalette);
+  }
+};
+
+function fetchOrNot () {
+  const storageData = getStorage ('dataMartians');
+  const storageDataPalette = getStorage ('firstPalette');
+  if (storageData === true && storageDataPalette === true) {
+    firstPalettes ('dataMartians');
+    createSquares (storageData);
+    searchTitle ();
+  } else {
+    fetchData (urlData);
+    paletteFetch (urlPalette);
+  }
+}
+
 function paletteFetch (urlToFetch) {
   fetch (urlToFetch).then (response => response.json ()).then (data => {
     const colorsPalette = data.palettes[0].colors;
-    for (const color of colorsPalette) {
-      const newPalette = document.createElement ('li');
-      newPalette.setAttribute ('class', 'color__item');
-      newPalette.style.backgroundColor = `#${color}`;
-      paletteList.appendChild (newPalette);
-    }
+    localStorage.setItem ('firstPalette', JSON.stringify (colorsPalette));
+    firstPalettes (colorsPalette);
   });
 }
-
-paletteFetch (urlPalette);
 
 const secondUrlPalette =
   'https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palettes.json';
@@ -134,5 +159,4 @@ function searchItem (event) {
     }
   }
 }
-
-searchInput.addEventListener ('keyup', searchItem);
+// searchInput.addEventListener('keyup', searchItem);
