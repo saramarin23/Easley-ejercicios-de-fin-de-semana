@@ -130,69 +130,85 @@ fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-sema
 
   })*/
 
-  //ejercicio6
-
+  
+//ejercicio9
   const list = document.querySelector('.container');
 
-  fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palettes.json')
+  if (localStorage.getItem('info') === null) {
+    fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palettes.json')
     .then(res=>res.json())
     .then(data => {
-      for (const arr_palettes of data.palettes){
-      
-        const title = document.createElement('h2');
-        title.classList.add('title');
-        const origin = document.createElement('h3');
-        origin.classList.add('origin');
-        const colors = document.createElement('div');
-        colors.classList.add('color');
-        const palette = document.createElement('li');
-        palette.classList.add('palette');
-
-        const title_cont = document.createTextNode(`Nombre de la nave: ${arr_palettes.name}`);
-        const origin_cont = document.createTextNode(`Serie: ${arr_palettes.from}`);
-        
-        title.appendChild(title_cont);
-        origin.appendChild(origin_cont);
-        palette.appendChild(title);
-        palette.appendChild(origin);
-        
-        const color_container = document.createElement('div');
-        color_container.classList.add('color_container');
-
-        for (const colors of arr_palettes.colors) {
-          
-          const item = document.createElement('div');
-          item.classList.add('color__item');
-          item.setAttribute('style', `background-color: #${colors}`);
-          color_container.appendChild(item);
-        }
-
-        palette.appendChild(color_container);
-        list.appendChild(palette);
-
-//ejercicio7
-
-        const selectPalette = () => {
-            palette.classList.toggle('selected');
-        }
-
-        palette.addEventListener('click', selectPalette);
-
-//ejercicio8
-
-        const input = document.querySelector('.field');
-
-        function search() {
-          if(arr_palettes.name.includes(input.value)) {
-            palette.classList.remove('hidden');
-          } else {
-            palette.classList.add('hidden');
-          }
-        }
-        
-        input.addEventListener('keyup', search);
-      }
+      paintData(data);
+      localStorage.setItem('info', JSON.stringify(data));
     })
+  } else {
+    paintData(JSON.parse(localStorage.getItem('info')));
+  }
 
 
+  function paintData(data) {
+
+  //ejercicio6
+    fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palettes.json')
+    .then(res=>res.json())
+    .then(data => {
+      
+        for (const arr_palettes of data.palettes){
+        
+          const title = document.createElement('h2');
+          title.classList.add('title');
+          const origin = document.createElement('h3');
+          origin.classList.add('origin');
+          const colors = document.createElement('div');
+          colors.classList.add('color');
+          const palette = document.createElement('li');
+          palette.classList.add('palette');
+
+          const title_cont = document.createTextNode(`Nombre de la nave: ${arr_palettes.name}`);
+          const origin_cont = document.createTextNode(`Serie: ${arr_palettes.from}`);
+          
+          title.appendChild(title_cont);
+          origin.appendChild(origin_cont);
+          palette.appendChild(title);
+          palette.appendChild(origin);
+          
+          const color_container = document.createElement('div');
+          color_container.classList.add('color_container');
+
+          for (const colors of arr_palettes.colors) {
+            
+            const item = document.createElement('div');
+            item.classList.add('color__item');
+            item.setAttribute('style', `background-color: #${colors}`);
+            color_container.appendChild(item);
+          }
+
+          palette.appendChild(color_container);
+          list.appendChild(palette);
+
+  //ejercicio7
+
+          const selectPalette = () => {
+              palette.classList.toggle('selected');
+          }
+
+          palette.addEventListener('click', selectPalette);
+
+  //ejercicio8
+
+          const input = document.querySelector('.field');
+
+          function search() {
+            if(arr_palettes.name.includes(input.value)) {
+              palette.classList.remove('hidden');
+            } else {
+              palette.classList.add('hidden');
+            }
+          }
+
+          input.addEventListener('keyup', search);
+          
+        }
+    })};
+  
 
