@@ -143,6 +143,33 @@ const data = [
 //  createElements();
 
 //ejercicio 6 
+// const ulEl = document.querySelector(".news");
+// function createElements(){
+//   fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palettes.json')
+//    .then(response=>response.json())
+//    .then(data=>{
+//      const arrPalette= data.palettes;
+//      const arrColors= arrPalette[0].colors;
+//      console.log(arrColors);  
+//   //hacemos el for
+//      for(let color of arrColors){
+//        //creamos nuestro li  
+//       const newItem=document.createElement('li');
+//       //Creamos contenido del li
+//      const newDiv=document.createElement('div');
+//      //añadimos atributos  al contenido de li
+//      newDiv.setAttribute('style', 'background-color:#' + color);
+//      newDiv.setAttribute('class', 'color-container');
+//    //se lo añadimos a nuestro Li
+//    newItem.appendChild(newDiv);
+//    //añadir nuestro Li con todo a UL
+//    ulEl.appendChild(newItem);
+//   }
+//    })
+//    }
+//    createElements();
+
+//Ejercicio 7
 const ulEl = document.querySelector(".news");
 function createElements(){
   fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palettes.json')
@@ -155,6 +182,7 @@ function createElements(){
      for(let color of arrColors){
        //creamos nuestro li  
       const newItem=document.createElement('li');
+      newItem.addEventListener('click', addSelected); //le agrego event litener a cada li.
       //Creamos contenido del li
      const newDiv=document.createElement('div');
      //añadimos atributos  al contenido de li
@@ -168,5 +196,11 @@ function createElements(){
    })
    }
    createElements();
+   addSelected();
 
-   
+
+   //añadir clase de selected a cada una de ellas. 
+   function addSelected(event){
+     const selectedItem=event.currentTarget;
+     selectedItem.classList.toggle('selected');
+   }

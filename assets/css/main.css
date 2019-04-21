@@ -50,3 +50,7 @@ body {
   height:50px;
   width: 50px;
 }
+.selected{
+  border-color: #BC2731;
+  box-shadow: 4px 4px 4px rgba(188, 39, 49, 0.6);
+}
