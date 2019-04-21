@@ -249,14 +249,14 @@ const data = [
   .then(response => response.json())
   .then(colorsData => {
     const colorsObject = colorsData.palettes;
-   
-
+  
     for (let i=0; i<colorsObject.length; i++){
     const colorsArray = colorsObject[i]; //primer elemento. 
     console.log(colorsArray);
 
     const li= document.createElement('li'); //1. creo li
     container.appendChild(li); //el contenedor va dentro de la lista
+    li.addEventListener('click', selectedItem)
 
     const title = document.createElement('h2'); //1.creo el elemento
      title.innerHTML = colorsArray.name;// 2. creo contenido del elemento
@@ -275,5 +275,12 @@ const data = [
     } 
   })
 
+  //Ejercicio 7 
+  function selectedItem(event){
+    const selectedli= event.currentTarget;
+    selectedli.classList.toggle('selected');
+
+  }
+  selectedItem();
 
 
