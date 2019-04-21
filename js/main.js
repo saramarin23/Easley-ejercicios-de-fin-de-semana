@@ -1,8 +1,11 @@
 'use strict';
 
 const news = document.querySelector('.news');
+const colorsContainer = document.querySelector('.palette__list-container');
 const urlData =
   'https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/news.json';
+const urlPalette =
+  'https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palette.json';
 const data = [
   {
     title: 'Asteroids 101',
@@ -100,3 +103,34 @@ const fetchData = url => {
 };
 
 fetchData(urlData);
+
+// Ejercicio 5 - Todo es color entre tú y tus arrays...
+const fetchPalette = url => {
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      const titlePalette = document.createElement('h2');
+      titlePalette.classList.add('title__palette');
+      const listColor = document.createElement('ul');
+      listColor.classList.add('list__color');
+
+      const titlePaletteContent = document.createTextNode(
+        data.palettes[0].name
+      );
+
+      titlePalette.appendChild(titlePaletteContent);
+
+      colorsContainer.appendChild(titlePalette);
+      colorsContainer.appendChild(listColor);
+
+      const colorsPalette = data.palettes[0].colors;
+      for (const color of colorsPalette) {
+        const newPalette = document.createElement('li');
+        newPalette.classList.add('color__item');
+        newPalette.setAttribute('style', `background-color:#${color}`);
+        listColor.appendChild(newPalette);
+      }
+    });
+};
+
+fetchPalette(urlPalette);

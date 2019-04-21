@@ -47,3 +47,19 @@ body {
 .news__item--no-image-visible .news__image {
   display: none;
 }
+
+.palette__list-container {
+  padding: 40px;
+}
+
+.list__color {
+  display: flex;
+  list-style: none;
+  padding: 0;
+}
+
+.color__item {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 50px;
+}
