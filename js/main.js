@@ -72,10 +72,13 @@ fetch (api)
         const contentTitleMars = itemNew.title;
           if (contentTitleMars.includes('Mars') || contentTitleMars.includes('Martians')){ 
             newItem.classList.add('news__item--from-mars');
-            console.log(contentTitleMars);
-      } 
-      }
-          console.log(data); 
+          }
+        newItem.classList.add('news__item--no-image-visible');
+        function appearImage () {
+        newItem.classList.toggle('news__item--no-image-visible')
+        }
+        newItem.addEventListener('click', appearImage);
+  } 
 });
 }
 renderNews();
