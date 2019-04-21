@@ -43,3 +43,7 @@ body {
 .news__item--no-image-visible .news__image {
   display: none;
 }
+.color_item {
+  flex-direction: row;
+  
+}
