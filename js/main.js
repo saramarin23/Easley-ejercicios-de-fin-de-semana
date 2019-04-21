@@ -3,6 +3,7 @@
 const news = document.querySelector('.news');
 const colorsContainer = document.querySelector('.palette__list-container');
 const palettesContainer = document.querySelector('.palettes__container');
+const searchInput = document.querySelector('#search__input');
 const urlData =
   'https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/news.json';
 const urlPalette =
@@ -147,7 +148,7 @@ const fetchPalettes = url => {
         const colorsContainer = document.createElement('li');
         colorsContainer.classList.add('colors__container');
         const titlePalette = document.createElement('h2');
-        titlePalette.classList.add('title__palette');
+        titlePalette.classList.add('title__palettes');
         const listColor = document.createElement('ul');
         listColor.classList.add('list__color');
 
@@ -156,7 +157,7 @@ const fetchPalettes = url => {
         );
 
         titlePalette.appendChild(titlePaletteContent);
-        addCircle(titlePalette);
+        addCircle(titlePalette); // Ejercicio 7
 
         const colors = data.palettes[i].colors;
         for (const color of colors) {
@@ -190,3 +191,19 @@ function toggleCircle(element) {
   element.classList.toggle('circle');
   element.classList.toggle('circle-selected');
 }
+
+// Ejercicio 8 - Buceando entre naves
+
+const searchPalette = () => {
+  const titlePalette = document.querySelectorAll('.title__palettes');
+  for (const title of titlePalette) {
+    const titleSearch = title.innerHTML;
+    if (titleSearch.includes(searchInput.value)) {
+      title.parentElement.classList.remove('hidden');
+    } else {
+      title.parentElement.classList.add('hidden');
+    }
+  }
+};
+
+searchInput.addEventListener('keyup', searchPalette);
