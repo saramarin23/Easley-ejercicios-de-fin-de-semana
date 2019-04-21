@@ -96,44 +96,77 @@ const data = [
 
 
 //Ejercicio 5
-let ulEl = document.querySelector(".news");
+// let ulEl = document.querySelector(".news");
+
+// function createElements1(){
+// fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palette.json')
+// .then(response=> response.json())
+// .then(data=>{
+//   const palette=data.palettes;
+//   const arrColors= palette[0].colors;
+//   console.log(arrColors);
+// for (let i=0; i<arrColors.length; i++){ 
+//   ulEl.innerHTML += `<li class="new-item">
+//                <div class="color-container" style="background-color:#${arrColors[i]}"> </div> </li>`;
+// //                
+// }
+// })
+// }
+// createElements1();
+
+//Ejercicio 5 DOM
 
 // function createElements(){
 // fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palette.json')
-// .then(response=>response.json())
-// .then(data=>{
-//   const arrPalette= data.palettes;
-//   const arrColors= arrPalette[0].colors;
-//   console.log(arrColors);
-//   for(let i=0; i<arrColors.length; i++);
-//   //Creamos elemento nuevo
-//   const newItem=document.createElement('li');
-//   //Creamos contenido
-//   const newDiv=document.createElement('div');
-//   //añadimos atributo 
-//   newDiv.setAttribute('style', 'background-color:' + arrColors[i]);
-// //se lo añadimos a nuestro Li
-// newItem.appendChild(newDiv);
-// //añadir nuestro Li con todo a UL
-// ulEl.appendChild(newItem);
-// })
+//  .then(response=>response.json())
+//  .then(data=>{
+//    const arrPalette= data.palettes;
+//    const arrColors= arrPalette[0].colors;
+//    console.log(arrColors);
+  
+// //hacemos el for
+//    for(let color of arrColors){
+//      //creamos nuestro li  
+//     const newItem=document.createElement('li');
+//     //Creamos contenido del li
+//    const newDiv=document.createElement('div');
+//    //añadimos atributos  al contenido de li
+//    newDiv.setAttribute('style', 'background-color:#' + color);
+//    newDiv.setAttribute('class', 'color-container');
+//  //se lo añadimos a nuestro Li
+//  newItem.appendChild(newDiv);
+//  //añadir nuestro Li con todo a UL
+//  ulEl.appendChild(newItem);
 // }
-// createElements();
+//  })
+//  }
+//  createElements();
 
-function createElements1(){
-fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palette.json')
-.then(response=> response.json())
-.then(data=>{
-  const palette=data.palettes;
-  const arrColors= palette[0].colors;
-  console.log(arrColors);
-for (let i=0; i<arrColors.length; i++){ 
-  ulEl.innerHTML += `<li class="new-item">
-               <div class="color-container" style="background-color:#${arrColors[i]}"> </div> </li>`;
-//                
-}
-})
-}
+//ejercicio 6 
+const ulEl = document.querySelector(".news");
+function createElements(){
+  fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palettes.json')
+   .then(response=>response.json())
+   .then(data=>{
+     const arrPalette= data.palettes;
+     const arrColors= arrPalette[0].colors;
+     console.log(arrColors);  
+  //hacemos el for
+     for(let color of arrColors){
+       //creamos nuestro li  
+      const newItem=document.createElement('li');
+      //Creamos contenido del li
+     const newDiv=document.createElement('div');
+     //añadimos atributos  al contenido de li
+     newDiv.setAttribute('style', 'background-color:#' + color);
+     newDiv.setAttribute('class', 'color-container');
+   //se lo añadimos a nuestro Li
+   newItem.appendChild(newDiv);
+   //añadir nuestro Li con todo a UL
+   ulEl.appendChild(newItem);
+  }
+   })
+   }
+   createElements();
 
-createElements1();
-
+   
