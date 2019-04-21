@@ -125,24 +125,24 @@
 // })//llave y paréntesis que cierra el ejercicio 3
 
 //Ejercicio 5
-const container = document.querySelector('.container');
-fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palette.json')
-  .then(response => response.json())
-  .then(data => {
-    for (const arr of data.palettes) {
-      const title = document.createElement('h2');
-      const contentTitle = document.createTextNode(arr.name);
-      title.appendChild(contentTitle);
-      container.appendChild(title);
-      for (const array_colors of arr.colors) {
-        const item = document.createElement('div');
-        item.classList.add('color__item');
+// const container = document.querySelector('.container');
+// fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palette.json')
+//   .then(response => response.json())
+//   .then(data => {
+//     for (const arr of data.palettes) {
+//       const title = document.createElement('h2');
+//       const contentTitle = document.createTextNode(arr.name);
+//       title.appendChild(contentTitle);
+//       container.appendChild(title);
+//       for (const array_colors of arr.colors) {
+//         const item = document.createElement('div');
+//         item.classList.add('color__item');
         
-        item.setAttribute('style', `background-color: #${array_colors}`);
-        container.appendChild(item);
-      }
-    }
-  })
+//         item.setAttribute('style', `background-color: #${array_colors}`);
+//         container.appendChild(item);
+//       }
+//     }
+//   })
 //Éstos son los datos de paleta que nos devuelve la petición para el ejercicio 5
                                   // {
                                   //   "name": "Space Ship 1",
@@ -156,15 +156,45 @@ fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-sema
 
 
 
+//Ejercicio 6
+const container = document.querySelector('.container');
 
+  fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palettes.json')
+    .then(response =>response.json())
+    .then(data => {
+      for (const arr_palettes of data.palettes){
+      
+        const title = document.createElement('h2');
+        title.classList.add('title');
+        const from = document.createElement('h3');
+        from.classList.add('origin');
+        const colors = document.createElement('div');
+        colors.classList.add('color');
+        const palette = document.createElement('li');
+        palette.classList.add('palette');
 
+        const title_cont = document.createTextNode(`Nave: ${arr_palettes.name}`);
+        const origin_cont = document.createTextNode(`Saga: ${arr_palettes.from}`);
+        
+        title.appendChild(title_cont);
+        from.appendChild(origin_cont);
+        palette.appendChild(title);
+        palette.appendChild(from);
+        
+        const color_container = document.createElement('div');
+        color_container.classList.add('color_container');
+
+        for (const colors of arr_palettes.colors) {
+          
+          const item = document.createElement('div');
+          item.classList.add('color__item');
+          item.setAttribute('style', `background-color: #${colors}`);
+          color_container.appendChild(item);
+        }
+
+        palette.appendChild(color_container);
+        container.appendChild(palette);
+      }
+    });
 
     
-
-
-
-
-
-
-
-
