@@ -111,8 +111,19 @@ const data = [
         newsList.appendChild(image);
     
         list.appendChild(newsList);
-      }
-    });
+     
+   
+
+    //Ejercicio 4
+    newsList.classList.add('news__item--no-image-visible');
+
+    function invisible () {
+      newsList.classList.toggle('news__item--no-image-visible');
+    }
+    newsList.addEventListener('click', invisible);
+  }//llave que cierra el ejercicio 3
+})//llave y paréntesis que cierra el ejercicio 3
+    
 
 
 
