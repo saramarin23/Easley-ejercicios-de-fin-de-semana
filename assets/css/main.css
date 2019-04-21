@@ -60,3 +60,15 @@ body {
 .selected--palete li {
   box-shadow: 0 0 0 2px rgba(188, 0, 0, 0.8);
 }
+/* form */
+.form {
+  text-align: center;
+  margin: 20px 0 0 0;
+}
+.form__label {
+  display: block;
+  margin-bottom: 10px;
+}
+.center {
+  text-align: center;
+}
