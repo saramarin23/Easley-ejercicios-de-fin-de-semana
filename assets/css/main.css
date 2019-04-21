@@ -92,3 +92,7 @@ body {
 .selected__item {
   background: lightgrey;
 }
+
+.hidden {
+  display: none;
+}

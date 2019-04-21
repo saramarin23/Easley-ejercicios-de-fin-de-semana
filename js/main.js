@@ -85,6 +85,7 @@ function secondPalette (urlToFetch) {
       const newInput = document.createElement ('input');
       newInput.setAttribute ('name', 'chooseTheme');
       newInput.setAttribute ('class', 'input__palette');
+      newInput.setAttribute ('value', palette.name);
       newInput.type = 'checkbox';
       newPaletteRow.appendChild (newInput);
 
@@ -116,18 +117,22 @@ function selectedItem (event) {
   selected.classList.toggle ('selected__item');
 }
 
-function searchItem (event) {
-  const searchText = event.currentTarget.value;
-  fetch (secondUrlPalette).then (response => response.json ()).then (data => {
-    const dataInfo = data.palettes;
-    for (const data of dataInfo) {
-      if (data.name.includes(searchText) === true) {
-        console.log(`Estás buscando: ${searchText}`);
-        console.log(data.name);
-      }
+//Búsqueda de elementos
 
+function searchItem (event) {
+  const titlesQuery = document.querySelectorAll ('.input__palette');
+  const searchText = event.currentTarget.value;
+
+  for (const titles of titlesQuery) {
+    const searchContent = searchText.toLowerCase ();
+    const titlesContent = titles.value.toLowerCase ();
+
+    if (titlesContent.includes (searchContent)) {
+      titles.parentElement.classList.remove ('hidden');
+    } else {
+      titles.parentElement.classList.add ('hidden');
     }
-  });
+  }
 }
 
 searchInput.addEventListener ('keyup', searchItem);
