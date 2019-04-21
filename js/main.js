@@ -1,6 +1,5 @@
 "use strict";
-
-//ex06
+//ex07
 function colorPalette() {
   fetch(
     `https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palettes.json`
@@ -16,7 +15,7 @@ function colorPalette() {
         const ulPalette = document.querySelector(".color-palette");
 
         let newUl = document.createElement("ul");
-
+        newUl.classList.add("color__list");
         const newTitle = document.createElement("h2");
         const newTitleInner = document.createTextNode(everyPalette.name);
 
@@ -29,9 +28,9 @@ function colorPalette() {
 
         const allColors = data.palettes[i];
         const everyColor = allColors.colors;
-
         newUl.append(newTitle, newFrom);
 
+        //loop for colors
         for (let y = 0; y < everyColor.length; y++) {
           let newLi = document.createElement("li");
           let bgColor = everyColor[y];
@@ -42,6 +41,12 @@ function colorPalette() {
           newLi.style.background = `${bgColor}`;
           newLi.setAttribute("style", `background-color:#${bgColor}`);
         }
+
+        // to add a new class to selected pallete
+        function selectItem(e) {
+            e.currentTarget.classList.toggle('selected--palete');
+        }
+        newUl.addEventListener("click", selectItem);
       }
     });
 }
