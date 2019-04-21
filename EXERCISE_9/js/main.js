@@ -29,13 +29,12 @@ const data = [
 ];
 
 const savedNews = JSON.parse(localStorage.getItem('newsLS'));
+const savedMovies = JSON.parse(localStorage.getItem('moviesLS'));
 
 const saveInLS = () => {
   if (savedNews === null) {
-    console.log('vacio')
     getListFromAPI();
   } else {
-    console.log('lleno')
     DOMFunctionsWrapper(savedNews);
   }
 }
@@ -60,11 +59,14 @@ const DOMFunctionsWrapper = arr => {
     item.addEventListener('click', hideImage);
   }
 
-  //6. Add first palette (to get from API)
-  fetchPaletteFromAPI(urlPalette2);
+  //9.2 Save data from APIS in LS
+  saveMoviesInLS();
 
-  //5. Add first palette (to get from API)
-  fetchPaletteFromAPI(urlPalette1);
+  // //6. Add first palette (to get from API)
+  // fetchPaletteFromAPI(urlPalette2);
+
+  // //5. Add first palette (to get from API)
+  // fetchPaletteFromAPI(urlPalette1);
 }
 
 const createNewsInDOM = arrayOfObjects => {
@@ -121,83 +123,98 @@ const addClassToPalette = (event) => {
   event.currentTarget.classList.toggle('palette__active');
 }
 
+const saveMoviesInLS = () => {
+  if (savedMovies === null) {
+    console.log('vacio')
+    fetchPaletteFromAPI(urlPalette2);
+    fetchPaletteFromAPI(urlPalette1);    
+  } else {
+    console.log('lleno')
+    paintPalettes(savedMovies);
+  }
+}
+
 const fetchPaletteFromAPI = (url) => {
   fetch(url)
     .then(response => response.json())
     .then(data => {
-      const arrObjs = data.palettes;
-      for (let i = 0; i < arrObjs.length; i++) {
-        //DIV CONTAINER OF PALETTE
-        const divContainer = document.createElement('div');
-        divContainer.classList.add('palette');
-
-        //NAME OF PALETTE
-        //---Container
-        let namePalette = arrObjs[i].name;
-        const nameItem = document.createElement('h3');
-        nameItem.classList.add('name__palette');
-        //---Content
-        const nameContent = document.createTextNode(namePalette);
-        //---Appenchild
-        nameItem.appendChild(nameContent);
-
-        //NAME FROM MOVIE...
-        //---Container
-        let moviePalette = arrObjs[i].from;
-        const movieName = document.createElement('h4');
-        movieName.classList.add('movie__palette');
-        //---Content
-        const movieContent = document.createTextNode(`from: "${moviePalette}"`);
-        //--Appenchild
-        movieName.appendChild(movieContent);
-
-        //DIV CONTAINER OF COLORS
-        const colorsDiv = document.createElement('div');
-        colorsDiv.classList.add('color__palette');
-
-        //COLORS OF PALETTE
-        let colorsPalette = arrObjs[i].colors;
-        for (let color of colorsPalette) {
-          //---Container
-          const colorItem = document.createElement('div');
-          colorItem.classList.add('color__item');
-          colorItem.style = `background-color:#${color}`;
-          //---Appenchild
-          colorsDiv.appendChild(colorItem);
-        }
-
-        //APPENCHILD
-        palettes.appendChild(divContainer);
-        divContainer.appendChild(nameItem);
-        divContainer.appendChild(movieName);
-        divContainer.appendChild(colorsDiv);
-
-        //7. Add class for palette selected
-        divContainer.addEventListener('click', addClassToPalette);
-
-        //8. Filter each time a letter is written in input
-        const shipSearcher = () => {
-          const nameLower = nameItem.innerHTML.toLowerCase();
-          const movieLower = movieName.innerHTML.toLowerCase();
-          const inputValue = input.value.toLowerCase();
-          const parent = nameItem.parentElement;
-          if (inputValue === '') {
-            parent.classList.remove('palette__visible');
-            parent.classList.add('palette');
-          } else if (inputValue === 'all') {
-            parent.classList.remove('palette');
-            parent.classList.add('palette__visible');
-          } else if (nameLower.includes(inputValue) || movieLower.includes(inputValue)) {
-            parent.classList.remove('palette');
-            parent.classList.add('palette__visible');
-          } else {
-            parent.classList.remove('palette__visible');
-            parent.classList.add('palette');
-          }
-        }
-        input.addEventListener('keyup', shipSearcher);
-      }
+      localStorage.setItem('moviesLS', JSON.stringify(data.palettes));
+      paintPalettes(data.palettes);
     });
+}
+
+const paintPalettes = arrObjs => {
+  for (let i = 0; i < arrObjs.length; i++) {
+    //DIV CONTAINER OF PALETTE
+    const divContainer = document.createElement('div');
+    divContainer.classList.add('palette');
+
+    //NAME OF PALETTE
+    //---Container
+    let namePalette = arrObjs[i].name;
+    const nameItem = document.createElement('h3');
+    nameItem.classList.add('name__palette');
+    //---Content
+    const nameContent = document.createTextNode(namePalette);
+    //---Appenchild
+    nameItem.appendChild(nameContent);
+
+    //NAME FROM MOVIE...
+    //---Container
+    let moviePalette = arrObjs[i].from;
+    const movieName = document.createElement('h4');
+    movieName.classList.add('movie__palette');
+    //---Content
+    const movieContent = document.createTextNode(`from: "${moviePalette}"`);
+    //--Appenchild
+    movieName.appendChild(movieContent);
+
+    //DIV CONTAINER OF COLORS
+    const colorsDiv = document.createElement('div');
+    colorsDiv.classList.add('color__palette');
+
+    //COLORS OF PALETTE
+    let colorsPalette = arrObjs[i].colors;
+    for (let color of colorsPalette) {
+      //---Container
+      const colorItem = document.createElement('div');
+      colorItem.classList.add('color__item');
+      colorItem.style = `background-color:#${color}`;
+      //---Appenchild
+      colorsDiv.appendChild(colorItem);
+    }
+
+    //APPENCHILD
+    palettes.appendChild(divContainer);
+    divContainer.appendChild(nameItem);
+    divContainer.appendChild(movieName);
+    divContainer.appendChild(colorsDiv);
+
+    //7. Add class for palette selected
+    divContainer.addEventListener('click', addClassToPalette);
+
+    //8. Filter each time a letter is written in input
+    const shipSearcher = () => {
+      const nameLower = nameItem.innerHTML.toLowerCase();
+      const movieLower = movieName.innerHTML.toLowerCase();
+      const inputValue = input.value.toLowerCase();
+      const parent = nameItem.parentElement;
+      if (inputValue === '') {
+        parent.classList.remove('palette__visible');
+        parent.classList.add('palette');
+      } else if (inputValue === 'all') {
+        parent.classList.remove('palette');
+        parent.classList.add('palette__visible');
+      } else if (nameLower.includes(inputValue) || movieLower.includes(inputValue)) {
+        parent.classList.remove('palette');
+        parent.classList.add('palette__visible');
+      } else {
+        parent.classList.remove('palette__visible');
+        parent.classList.add('palette');
+      }
+    }
+    input.addEventListener('keyup', shipSearcher);
+  }
 }
 
 //3. Get list of news from API
@@ -209,5 +226,5 @@ const fetchPaletteFromAPI = (url) => {
 //2. Look for word "mars" or "martian" in titles and put new class 'news__item--from-mars' on parents of titles (li elements)
 // martianClassAddition(resultArr);
 
-//9. Save data from APIS in LS
+//9.1 Save data from APIS in LS
 saveInLS();
