@@ -60,3 +60,13 @@ body {
 .container {
   list-style: none;
 }
+
+/* ejercicio 7 */
+
+.selected {
+  border: 2px solid orange;
+  background: rgb(241, 163, 18);
+  padding: 10px;
+} 
+
+

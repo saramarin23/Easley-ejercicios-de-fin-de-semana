@@ -194,7 +194,16 @@ const container = document.querySelector('.container');
 
         palette.appendChild(color_container);
         container.appendChild(palette);
+
+        palette.addEventListener('click', selectPalette);
+
       }
     });
 
-    
+    //Ejercicio 7
+    const selectPalette = (e) => {
+      let palette = e.currentTarget;
+      palette.classList.toggle('selected');
+  }
+
+
