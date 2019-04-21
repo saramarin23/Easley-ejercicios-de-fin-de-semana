@@ -2,10 +2,13 @@
 
 const news = document.querySelector('.news');
 const colorsContainer = document.querySelector('.palette__list-container');
+const palettesContainer = document.querySelector('.palettes__container');
 const urlData =
   'https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/news.json';
 const urlPalette =
   'https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palette.json';
+const urlPalettes =
+  'https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palettes.json';
 const data = [
   {
     title: 'Asteroids 101',
@@ -134,3 +137,40 @@ const fetchPalette = url => {
 };
 
 fetchPalette(urlPalette);
+
+// Ejercicio 6 - Episodio VI: El retorno de las paletas
+const fetchPalettes = url => {
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      for (let i = 0; i < data.palettes.length; i++) {
+        const colorsContainer = document.createElement('li');
+        colorsContainer.classList.add('colors__container');
+        const titlePalette = document.createElement('h2');
+        titlePalette.classList.add('title__palette');
+        const listColor = document.createElement('ul');
+        listColor.classList.add('list__color');
+
+        const titlePaletteContent = document.createTextNode(
+          data.palettes[i].name
+        );
+
+        titlePalette.appendChild(titlePaletteContent);
+
+        const colors = data.palettes[i].colors;
+        for (const color of colors) {
+          const newPalette = document.createElement('li');
+          newPalette.classList.add('color__item');
+          newPalette.setAttribute('style', `background-color:#${color}`);
+          listColor.appendChild(newPalette);
+        }
+
+        colorsContainer.appendChild(titlePalette);
+        colorsContainer.appendChild(listColor);
+
+        palettesContainer.appendChild(colorsContainer);
+      }
+    });
+};
+
+fetchPalettes(urlPalettes);

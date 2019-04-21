@@ -52,6 +52,10 @@ body {
   padding: 40px;
 }
 
+.title__palette {
+  font-style: italic;
+}
+
 .list__color {
   display: flex;
   list-style: none;
@@ -62,4 +66,8 @@ body {
   width: 100px;
   height: 100px;
   margin-bottom: 50px;
+}
+
+.colors__container {
+  list-style: none;
 }
