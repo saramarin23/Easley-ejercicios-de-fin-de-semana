@@ -195,7 +195,7 @@ const container = document.querySelector('.container');
         palette.appendChild(color_container);
         container.appendChild(palette);
 
-        palette.addEventListener('click', selectPalette);
+        palette.addEventListener('click', selectPalette);//para ejercicio 7
 
       }
     });
@@ -206,4 +206,37 @@ const container = document.querySelector('.container');
       palette.classList.toggle('selected');
   }
 
+// Ejercicio 8
 
+// const titleSearch = document.createElement('h1');
+//   titleSearch.classList.add('titleSearch');
+//   const search_cont = document.createTextNode('Introduce el nombre de tu nave favorita');
+//         titleSearch.appendChild(search_cont);
+//         container.appendChild(titleSearch);
+
+
+// const input = document.createElement('input');
+//     input.classList.add('field');
+//     const input_cont = document.createTextNode('');
+        
+//         input.appendChild(input_cont);
+//         container.appendChild(input);
+
+
+
+function search() {
+  const arrTitle = document.querySelectorAll('.title');
+  //izquierda objeto / derecha array
+  for (const title of arrTitle){
+    const titleText = title.textContent;
+    if(titleText.includes(input.value,6)) {
+      title.parentElement.classList.remove('hidden');
+    } else {
+      title.parentElement.classList.add('hidden');
+    }
+  }
+}
+const input = document.querySelector('#field');
+input.addEventListener('keyup', search);
+          
+      
