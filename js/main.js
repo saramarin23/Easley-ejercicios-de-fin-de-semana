@@ -69,7 +69,7 @@ const fetchData = url => {
       const data = dataNews.news;
       for (let i = 0; i < data.length; i++) {
         const newItem = document.createElement('li');
-        newItem.classList.add('news__item');
+        newItem.classList.add('news__item', 'news__item--no-image-visible');
         const subtitle = document.createElement('h2');
         subtitle.classList.add('news__title');
         const image = document.createElement('img');
@@ -86,7 +86,15 @@ const fetchData = url => {
         newItem.appendChild(subtitle);
         newItem.appendChild(image);
         news.appendChild(newItem);
+
+        // Ejercicio 4 - Ahora me ves...
+        function handElementClick(event) {
+          const selectImage = event.currentTarget;
+          selectImage.classList.toggle('news__item--no-image-visible');
+        }
+        newItem.addEventListener('click', handElementClick);
       }
+
       mars();
     });
 };
