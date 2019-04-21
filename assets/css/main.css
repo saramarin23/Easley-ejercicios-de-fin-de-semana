@@ -52,7 +52,8 @@ body {
   width: 100px;
 }
 .selected {
-  border : 2px solid red;
+  border : 2px solid lime;
+  width: 50%;
 }
 
 .hidden {
