@@ -18,7 +18,7 @@ body {
   border: 1px solid rgba(0, 0, 0, 0.1);
   padding: 10px;
   background: #fff;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1px 5px rgba(0, 0, 0.90, 0.15);
 }
 
 .news__title {
@@ -30,3 +30,7 @@ body {
   width: 100%;
 }
 
+.news__item--from-mars {
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.90);
+  color: blue;
+}
