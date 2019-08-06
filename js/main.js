@@ -48,8 +48,13 @@ fetch(ENDPOINT)
 
     }
     for( let item of liArray){
+      item.addEventListener('click', show);
       if (item.firstChild.innerHTML.includes('Mars') ||item.firstChild.innerHTML.includes('Martian')){
         item.classList.add('news__item--from-mars');
       }
     }
   });
+
+function show(event){
+  event.currentTarget.classList.toggle('news__item--no-image-visible');
+}
