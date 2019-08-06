@@ -100,8 +100,9 @@ function showImage(event){
   selectedItem.classList.toggle('news__item--no-image-visible');
 }
 
-const paletteContainer = document.querySelector('.palette__container');
 const paletteUrl = 'https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palette.json';
+const paletteUrl2 = 'https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palettes.json';
+const paletteContainer = document.querySelector('.palette__container');
 
 function getPallete (){
   fetch(paletteUrl)
@@ -132,3 +133,47 @@ function getPallete (){
     });
 }
 getPallete();
+
+function getPallete2 (){
+  fetch(paletteUrl2)
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(data) {
+      for (let i=0; i< data.palettes.length; i++){
+        const newPaletteContainer = document.createElement('div');
+        newPaletteContainer.classList.add('new__palette-container');
+
+        const paletteTitle = document.createElement('h3');
+        paletteTitle.classList.add('palette__title');
+
+        const paletteContent = document.createTextNode(data.palettes[i].name);
+        paletteTitle.appendChild(paletteContent);
+        newPaletteContainer.appendChild(paletteTitle);
+
+        const paletteFrom = document.createElement('h4');
+        paletteFrom.classList.add('palette__from');
+
+        const paletteFromContent = document.createTextNode(`From: ${data.palettes[i].from}`);
+        paletteFrom.appendChild(paletteFromContent);
+        newPaletteContainer.appendChild(paletteFrom);
+
+        const colorsContainer = document.createElement('div');
+        colorsContainer.classList.add('palette__colors-container');
+
+        const colorArray = data.palettes[i].colors;
+        for (let z = 0; z < colorArray.length; z++){
+          const newColor = document.createElement('div');
+          newColor.classList.add('palette__color');
+          newColor.classList.add(`palette__color${z}`);
+          newColor.setAttribute('style', `background-color:#${colorArray[z]}`);
+
+          colorsContainer.appendChild(newColor);
+        }
+        newPaletteContainer.appendChild(colorsContainer);
+        paletteContainer.appendChild(newPaletteContainer);
+      }
+    });
+}
+getPallete2();
+
