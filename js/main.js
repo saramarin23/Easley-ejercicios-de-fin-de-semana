@@ -23,8 +23,8 @@ const data = [
     image: 'https://via.placeholder.com/200x100'
   }
 ];
-function addElementslist(){
-  for (const item of data){
+function addElementslist() {
+  for (const item of data) {
 
     const newItem = document.createElement('li');
     const newh2 = document.createElement('h2');
@@ -42,6 +42,18 @@ function addElementslist(){
   }
 }
 addElementslist();
+const itemsElements = document.querySelectorAll('.news__item');
+const classTitle = document.querySelectorAll('.news__title');
+
+function resaltmarcianos() {
+  for (let i = 0; i < itemsElements.length; i++) {
+    if (classTitle[i].innerHTML.includes('Mars') | classTitle[i].innerHTML.includes('Martian')) {
+      itemsElements[i].classList.add('news__item--from-mars');
+    }
+  }
+}
+
+resaltmarcianos();
 
 /*for (const item of data){
   news.innerHTML += `<li class="news__item">
