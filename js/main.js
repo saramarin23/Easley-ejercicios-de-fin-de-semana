@@ -45,7 +45,7 @@ function putList() {
 // Destacar los resultados "marcianos"
 
 //1. Buscamos todos los eltos con clase .news__item
-const newsItem = document.querySelectorAll('.news__item');
+//const newsItem = document.querySelectorAll('.news__item');
 
 //2. Recorremos la lista de eltos almacenando en una variable
 //el contenido del título de cada elto.
@@ -82,6 +82,12 @@ function showImg (event) {
 //3. En el espacio nadie puede oir tus fetchs
 const ENDPOINT = 'https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/news.json';
 
+// Carlos: y esta es mi función que pone o quita la clase que se pide
+function toggleIMG(event) {
+  console.log('esto ya lo sigues tú :)');
+}
+
+
 function paint() {
   fetch(ENDPOINT)
     .then(response => response.json())
@@ -96,6 +102,14 @@ function paint() {
         `;
         news.innerHTML = lis;
       }
+
+      // Carlos: Aquí, dentro del fetch, ya he escrito todas las cosas y puedo buscarlas en el dom
+      const newsItems = document.querySelectorAll('.news__item');
+      // Carlos: como querySelectorAll me devuelve un array puedo recorrerlo y aplicarle un listener a cada elemento
+      for (const item of newsItems) {
+        item.addEventListener('click', toggleIMG);
+      }
+
       let title = [];
       for(let i=0; i<data.length; i++) {
         title[i] = data[i].title;
