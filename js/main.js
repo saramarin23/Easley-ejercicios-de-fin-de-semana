@@ -1,5 +1,6 @@
 'use strict';
 const list = document.querySelector('.news');
+const urlMars = 'https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/news.json';
 
 // const data = [
 //   {
@@ -47,8 +48,6 @@ const list = document.querySelector('.news');
 
 // writeData();
 
-const urlMars = 'https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/news.json';
-
 function getApi (){
   fetch(urlMars)
     .then(function(response) {
@@ -58,6 +57,7 @@ function getApi (){
       for (let i=0; i<data.news.length; i++){
         const newLi = document.createElement('li');
         newLi.classList.add('news__item');
+        newLi.classList.add('news__item--no-image-visible');
 
         const newTitle = document.createElement('h2');
         newTitle.classList.add('news__title');
@@ -74,20 +74,28 @@ function getApi (){
         list.appendChild(newLi);
       }
 
+      const allItems = document.querySelectorAll('.news__item');
+      for (let lis of allItems) {
+        lis.addEventListener('click', showImage);
+      }
+
+      let items = '';
+      for(let i=0; i<allItems.length; i++){
+        let listItem = allItems[i];
+        items = allItems[i].firstChild.innerHTML;
+        if (items.includes('Mars')){
+          listItem.classList.add('news__item--from-mars');
+        }
+        if (items.includes('Martian')) {
+          listItem.classList.add('news__item--from-mars');
+        }
+      }
     });
+
 }
 getApi();
 
-const allItems = document.querySelectorAll('.news__item');
-let items = '';
-
-for(let i=0; i<allItems.length; i++){
-  let listItem = allItems[i];
-  items = allItems[i].firstChild.innerHTML;
-  if (items.includes('Mars')){
-    listItem.classList.add('news__item--from-mars');
-  }
-  if (items.includes('Martian')) {
-    listItem.classList.add('news__item--from-mars');
-  }
+function showImage(event){
+  const selectedItem = event.currentTarget;
+  selectedItem.classList.toggle('news__item--no-image-visible');
 }
