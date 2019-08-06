@@ -1,4 +1,5 @@
 'use strict';
+const news = document.querySelector('.news');
 
 const data = [
   {
@@ -22,3 +23,30 @@ const data = [
     image: 'https://via.placeholder.com/200x100'
   }
 ];
+function addElementslist(){
+  for (const item of data){
+
+    const newItem = document.createElement('li');
+    const newh2 = document.createElement('h2');
+    const newimg = document.createElement('img');
+    const newContent = document.createTextNode(item.title);
+    newItem.setAttribute('class', 'news__item');
+    newimg.setAttribute('class', 'news__image');
+    newimg.setAttribute('src', `${item.image}`);
+    newimg.setAttribute('alt', `${item.title} imagen`);
+    newh2.setAttribute('class', 'news__title');
+    newh2.appendChild(newContent);
+    newItem.appendChild(newh2);
+    newItem.appendChild(newimg);
+    news.appendChild(newItem);
+  }
+}
+addElementslist();
+
+/*for (const item of data){
+  news.innerHTML += `<li class="news__item">
+  <h2 class="news__title">${item.title}</h2>
+  <img class="news__image" src="${item.image}" alt="${item.title}">
+  </li>
+  `;
+}*/
