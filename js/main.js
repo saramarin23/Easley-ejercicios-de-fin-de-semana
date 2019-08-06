@@ -2,18 +2,32 @@
 
 const list = document.querySelector('.news');
 
+
+function changeClass(event) {
+  if(event.currentTarget.classList.contains('news__item--no-image-visible')) {
+    event.currentTarget.classList.remove('news__item--no-image-visible');
+  } else {
+    event.currentTarget.classList.add('news__item--no-image-visible');
+  }
+}
+
 fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/news.json')
   .then(response => response.json())
   .then(data => {
     for (let element of data.news) {
       const newItem = document.createElement('li');
       newItem.classList.add('news__item');
+      newItem.classList.add('news__item--no-image-visible');
+      newItem.addEventListener('click', changeClass);
+
       const newTitle = document.createElement('h2');
       const newContent = document.createTextNode(element.title);
       newTitle.classList.add('news__title');
+
       const newImage = document.createElement('img');
       newImage.src = element.image;
       newImage.classList.add('news__image');
+
       newTitle.appendChild(newContent);
       newItem.appendChild(newTitle);
       newItem.appendChild(newImage);
@@ -21,6 +35,7 @@ fetch('https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-sema
     }
   }
   );
+
 
 /*const data = [
   {
