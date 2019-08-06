@@ -26,12 +26,6 @@ const data = [
 ];
 
 function writeNews () {
-  /*  for (const item of data) {
-    news.innerHTML += `<li class="news__item>
-                          <h2 class="news__title">${item.title}</h2>
-                          <img class="news__image" src="${item.image}" alt="${item.title}">
-                       </li>`;
-  } */
   for (const item of data) {
     const newNotice = document.createElement('li');
     newNotice.classList.add('news__item');
@@ -46,8 +40,6 @@ function writeNews () {
     noticeImg.setAttribute('src', item.image);
     noticeImg.setAttribute('alt', item.title);
 
-
-
     newNotice.appendChild(noticeTitle);
     newNotice.appendChild(noticeImg);
     news.appendChild(newNotice);
@@ -55,3 +47,17 @@ function writeNews () {
 }
 
 writeNews();
+
+const martians = document.querySelectorAll('.news__item');
+let title = '';
+
+for (let i=0; i<martians.length; i++) {
+  let martianNew = martians[i];
+  title = martians[i].firstChild.innerHTML;
+  if (title.includes('Mars')){
+    martianNew.classList.add('news__item--from-mars');
+  }
+  if (title.includes('Martian')) {
+    martianNew.classList.add('news__item--from-mars');
+  }
+}
