@@ -35,3 +35,16 @@ for (const item of data) {
 }
 list.innerHTML = imageLis;
 
+//2/
+const newsItem = document.querySelectorAll('.news__item');
+
+for (const li of newsItem) {
+  const h2 = li.querySelector('h2');
+  const text = h2.innerText;
+
+  if (text.includes('Mars') || text.includes('Martian')) {
+    li.classList.add('news__item--from-mars');
+  }
+}
+
+
