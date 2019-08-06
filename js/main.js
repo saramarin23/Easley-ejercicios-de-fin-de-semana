@@ -46,3 +46,17 @@ function writeData(){
 }
 
 writeData();
+
+const allItems = document.querySelectorAll('.news__item');
+let items = '';
+
+for(let i=0; i<allItems.length; i++){
+  let listItem = allItems[i];
+  items = allItems[i].firstChild.innerHTML;
+  if (items.includes('Mars')){
+    listItem.classList.add('news__item--from-mars');
+  }
+  if (items.includes('Martian')) {
+    listItem.classList.add('news__item--from-mars');
+  }
+}
