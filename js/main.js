@@ -23,6 +23,8 @@ const data = [
   }
 ];
 
+//Ejercicio 1
+
 const lists = document.querySelector(".news");
 
 lists.innerHTML += `<li class="news__item"><h2 class="news__title"><img class="news__image" src="${
@@ -44,3 +46,13 @@ lists.innerHTML += `<li class="news__item"><h2 class="news__title"><img class="n
 }</h2></li><li class="news__item"><h2 class="news__title"><img class="news__image" src="${
   data[4].image
 }" alt="${data[4].title}">${data[4].title}</h2></li>`;
+
+//Ejercicio 2
+const newsItem = document.querySelectorAll(".news__item");
+
+for (let i = 0; i < newsItem.length; i++) {
+  const elementNewsItem = newsItem[i].innerHTML;
+  if (elementNewsItem.includes("Mars") || elementNewsItem.includes("Martian")) {
+    newsItem[i].classList.add("news__item--from-mars");
+  }
+}
