@@ -22,3 +22,21 @@ const data = [
     image: 'https://via.placeholder.com/200x100'
   }
 ];
+
+// Elementos del HTML
+const news = document.querySelector('.news');
+
+function putList() {
+  let lis = '';
+  for (let item of data) {
+    lis += `
+      <li class="news__item">
+        <h2 class="news__title">${item.title}</h2>
+        <img class="news__image" src="${item.image}" alt="${item.title}">
+      </li>
+    `;
+    news.innerHTML = lis;
+  }
+}
+
+putList();
