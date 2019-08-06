@@ -95,15 +95,34 @@ function selectMars() {
   }
 }
 
-
 //4
+//listener to li inside for of newsItem
+//add .toogle to li.
 
 
+//5
+const paletteContainer = document.querySelector('.palette');
 
-// Recapitulando:
+const PALETTE = 'https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palette.json';
 
-// Por defecto todos los LI tendrán una clase extra: news__item--no-image-visible
-//  que hará que la imagen del LI no se vea
-// Al hacer click en cada noticia la quitaremos si ya la tenía o la pondremos
-// si no la tenía de manera que al hacer click aparecerá o desaparecerá la imagen.
+fetch(PALETTE)
+  .then(response => response.json())
+  .then(data => {
+    const paletteName = document.createElement('h3');
+    const paletteNameText = document.createTextNode(data.palettes[0].name);
+    paletteName.appendChild(paletteNameText);
+    paletteContainer.appendChild(paletteName);
 
+    return data.palettes[0].colors;
+  })
+  .then(colors => {
+    for (const color of colors) {
+      console.log(color)
+      const box = document.createElement('div');
+
+      box.classList.add('palette__box');
+      box.style.backgroundColor = `#${color}`;
+
+      paletteContainer.appendChild(box);
+    }
+  });
