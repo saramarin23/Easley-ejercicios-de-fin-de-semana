@@ -28,10 +28,12 @@ const data = [
 function elementData() {
   for (let element of data) {
     const newItem = document.createElement('li');
+    const newTitle = document.createElement('h2');
     const newContent = document.createTextNode(element.title);
     const newImage = document.createElement('img');
     newImage.src = element.image;
-    newItem.appendChild(newContent);
+    newTitle.appendChild(newContent);
+    newItem.appendChild(newTitle);
     newItem.appendChild(newImage);
     list.appendChild(newItem);
   }
