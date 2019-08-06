@@ -1,6 +1,7 @@
 'use strict';
 
 const newUl = document.querySelector('.news');
+let liArray = [];
 const data = [
   {
     title: 'Asteroids 101',
@@ -23,14 +24,6 @@ const data = [
     image: 'https://via.placeholder.com/200x100'
   }
 ];
-// <!--
-// Dentro de este ul hay que meter el contenido del array data
-// y cada elemento tiene que tener las siguientes clases:
-// <li class="news__item">
-//   <h2 class="news__title">AQUÍ-VA-EL-TÍTULO</h2>
-//   <img class="news__image" src="AQUÍ-VA-LA-RUTA-DE-LA-IMAGEN" alt="AQUÍ-VA-EL-TÍTULO">
-// </li>
-// -->
 
 for (let item of data){
   const newimg = document.createElement('img');
@@ -46,5 +39,22 @@ for (let item of data){
   newli.appendChild(newimg);
   newli.classList.add('news__item');
   newUl.appendChild(newli);
+  liArray = newUl.querySelectorAll ('.news__item');
 
+}
+
+// 2/ Marte, el planeta rojo
+// Una vez tenemos nuestra lista de noticias vamos a destacar los resultados "marcianos" aplicando la clase .news__item--from-mars.
+
+// Aplicaremos esta clase a los <li> cuyo título contenga “Mars” o “Martian”, para ello:
+
+// Buscaremos todos los elementos con clase .news__item.
+// Recorreremos la lista de elementos almacenando en una variable el contenido del título de cada elemento.
+// Usando el método includes() comprobaremos si contienen “Mars” o “Martian” y aplicaremos al licorrespondiente la clase .news__item--from-mars
+// Tada!!
+
+for( let item of liArray){
+  if (item.firstChild.innerHTML.includes('Mars') ||item.firstChild.innerHTML.includes('Martian')){
+    item.classList.add('news__item--from-mars');
+  }
 }
