@@ -1,6 +1,6 @@
 'use strict';
 
-const data = [
+/* const data = [
   {
     title: 'Asteroids 101',
     image: 'https://via.placeholder.com/200x100'
@@ -21,7 +21,7 @@ const data = [
     title: 'Space The Final Frontier',
     image: 'https://via.placeholder.com/200x100'
   }
-];
+]; */
 
 // Elementos del HTML
 const news = document.querySelector('.news');
@@ -39,7 +39,7 @@ function putList() {
   }
 }
 
-putList();
+//putList();
 
 
 // Destacar los resultados "marcianos"
@@ -68,4 +68,38 @@ function getTitle() {
   return title;
 }
 
-getTitle();
+//getTitle();
+
+
+//3. En el espacio nadie puede oir tus fetchs
+const ENDPOINT = "https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/news.json";
+
+function paint() {
+  fetch(ENDPOINT)
+    .then(response => response.json())
+    .then(data => {
+      let lis = '';
+      for (let item of data.news) {
+        lis += `
+          <li class="news__item">
+            <h2 class="news__title">${item.title}</h2>
+            <img class="news__image" src="${item.image}" alt="${item.title}">
+          </li>
+        `;
+        news.innerHTML = lis;
+      }
+      let title = [];
+      for(let i=0; i<data.length; i++) {
+        title[i] = data[i].title;
+      }
+      for(let i=0; i<title.length; i++) {
+        if(title[i].includes('Mars') || title[i].includes('Martian')) {
+          newsItem[i].classList.add('news__item--from-mars');
+        }
+      }
+
+    });
+
+}
+
+paint();
