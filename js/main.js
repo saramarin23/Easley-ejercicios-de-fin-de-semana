@@ -66,7 +66,7 @@ function printImages(data) {
   let imageLis = '';
   for (const item of data) {
     imageLis += `
-    <li class="news__item">
+    <li class="news__item news__item--no-image-visible">
       <h2 class="news__title">${item.title}</h2>
       <img class="news__image" src="${item.image}" alt="${item.title}">
     </li>
@@ -76,10 +76,16 @@ function printImages(data) {
   selectMars();
 }
 
+const newsItem = document.querySelectorAll('.news__item');
+
 function selectMars() {
   const newsItem = document.querySelectorAll('.news__item');
 
   for (const li of newsItem) {
+    li.addEventListener('click', function () {
+      li.classList.toggle('news__item--no-image-visible');
+    });
+
     const h2 = li.querySelector('h2');
     const text = h2.innerText;
 
@@ -90,4 +96,14 @@ function selectMars() {
 }
 
 
+//4
+
+
+
+// Recapitulando:
+
+// Por defecto todos los LI tendrán una clase extra: news__item--no-image-visible
+//  que hará que la imagen del LI no se vea
+// Al hacer click en cada noticia la quitaremos si ya la tenía o la pondremos
+// si no la tenía de manera que al hacer click aparecerá o desaparecerá la imagen.
 
