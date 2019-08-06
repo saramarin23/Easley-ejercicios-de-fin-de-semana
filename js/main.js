@@ -99,3 +99,36 @@ function showImage(event){
   const selectedItem = event.currentTarget;
   selectedItem.classList.toggle('news__item--no-image-visible');
 }
+
+const paletteContainer = document.querySelector('.palette__container');
+const paletteUrl = 'https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/palette.json';
+
+function getPallete (){
+  fetch(paletteUrl)
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(data) {
+      for (let i=0; i<data.palettes.length; i++){
+        const paletteTitle = document.createElement('h3');
+        paletteTitle.classList.add('palette__title');
+        const paletteContent = document.createTextNode(data.palettes[i].name);
+        paletteTitle.appendChild(paletteContent);
+
+        paletteContainer.appendChild(paletteTitle);
+      }
+      const colorsContainer = document.createElement('div');
+      colorsContainer.classList.add('palette__colors-container');
+      for (let i=0; i<data.palettes[0].colors.length; i++){
+        const colorArray = data.palettes[0].colors;
+        const newColor = document.createElement('div');
+        newColor.classList.add('palette__color');
+        newColor.classList.add(`palette__color${i}`);
+        newColor.setAttribute('style', `background-color:#${colorArray[i]}`);
+
+        colorsContainer.appendChild(newColor);
+        paletteContainer.appendChild(colorsContainer);
+      }
+    });
+}
+getPallete();
