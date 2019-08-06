@@ -70,14 +70,6 @@ function getTitle() {
 
 //getTitle();
 
-function showImg (event) {
-  console.log('hola');
-  if(event.currentTarget.classList.contains('news__item--no-image-visible')){
-    event.currentTarget.classList.remove('news__item--no-image-visible');
-  } else {
-    event.currentTarget.classList.add('news__item--no-image-visible');
-  }
-}
 
 //3. En el espacio nadie puede oir tus fetchs
 const ENDPOINT = 'https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-fin-de-semana/master/data/news.json';
@@ -85,6 +77,11 @@ const ENDPOINT = 'https://raw.githubusercontent.com/Adalab/Easley-ejercicios-de-
 // Carlos: y esta es mi función que pone o quita la clase que se pide
 function toggleIMG(event) {
   console.log('esto ya lo sigues tú :)');
+  if(event.currentTarget.classList.contains('news__item--no-image-visible')){
+    event.currentTarget.classList.remove('news__item--no-image-visible');
+  } else {
+    event.currentTarget.classList.add('news__item--no-image-visible');
+  }
 }
 
 
@@ -115,9 +112,8 @@ function paint() {
         title[i] = data[i].title;
       }
       for(let i=0; i<title.length; i++) {
-        newsItem[i].addEventListener('click', showImg);
         if(title[i].includes('Mars') || title[i].includes('Martian')) {
-          newsItem[i].classList.add('news__item--from-mars');
+          newsItems[i].classList.add('news__item--from-mars');
         }
       }
 
