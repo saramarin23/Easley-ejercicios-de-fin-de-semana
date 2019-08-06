@@ -43,3 +43,18 @@ function elementData() {
 }
 
 elementData();
+
+const allNews = document.querySelectorAll('.news__item');
+let liName = [];
+
+function findElement() {
+  for (let li of allNews) {
+    const title = li.querySelector('.news__title');
+    liName.push(title.innerHTML);
+    if (title.innerHTML.includes('Mars') || title.innerHTML.includes('Martian')) {
+      li.classList.add('news__item--from-mars');
+    }
+  }
+}
+
+findElement();
