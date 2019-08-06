@@ -28,16 +28,18 @@ const data = [
 function elementData() {
   for (let element of data) {
     const newItem = document.createElement('li');
+    newItem.classList.add('news__item');
     const newTitle = document.createElement('h2');
     const newContent = document.createTextNode(element.title);
+    newTitle.classList.add('news__title');
     const newImage = document.createElement('img');
     newImage.src = element.image;
+    newImage.classList.add('news__image');
     newTitle.appendChild(newContent);
     newItem.appendChild(newTitle);
     newItem.appendChild(newImage);
     list.appendChild(newItem);
   }
 }
+
 elementData();
-
-
