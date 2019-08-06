@@ -1,4 +1,5 @@
 'use strict';
+const list = document.querySelector('.news');
 
 const data = [
   {
@@ -22,3 +23,15 @@ const data = [
     image: 'https://via.placeholder.com/200x100'
   }
 ];
+let imageLis = '';
+
+for (const item of data) {
+  imageLis += `
+    <li class="news__item">
+      <h2 class="news__title">${item.title}</h2>
+      <img class="news__image" src="${item.image}" alt="${item.title}">
+    </li>
+    `;
+}
+list.innerHTML = imageLis;
+
