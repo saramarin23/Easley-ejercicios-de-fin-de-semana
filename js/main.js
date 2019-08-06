@@ -81,7 +81,7 @@ function paint() {
       let lis = '';
       for (let item of data.news) {
         lis += `
-          <li class="news__item">
+          <li class="news__item news__item--no-image-visible">
             <h2 class="news__title">${item.title}</h2>
             <img class="news__image" src="${item.image}" alt="${item.title}">
           </li>
