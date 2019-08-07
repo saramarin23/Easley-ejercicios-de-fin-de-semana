@@ -73,6 +73,7 @@ function getImage() {
         const newh2 = document.createElement("h2"); //Creamos el titular
         const titleText = document.createTextNode(item.title); //Creamos la variable con el texto del título recogido en la API
         newList.classList.add("news__item"); //Le ponemos la clase necesaria para el siguiente apartado
+        newList.classList.add("news__item--no-image-visible"); //Necesario para el ejercicio 4
         newImage.setAttribute("src", `${item.image}`);
         newImage.setAttribute("alt", `${item.title}`);
         newImage.classList.add("news__image");
@@ -94,7 +95,18 @@ function getImage() {
           martianNew.classList.add("news__item--from-mars"); //Si ese título incluye x, añádeme esta clase
         }
       }
+
+      for (const item of lis) {
+        item.addEventListener("click", showImage); //Evento necesario para ejercicio 4
+      }
     });
 }
 
 getImage();
+
+//Ejercicio 4
+function showImage(event) {
+  const ct = event.currentTarget;
+  console.log(ct);
+  ct.classList.toggle("news__item--no-image-visible");
+}
