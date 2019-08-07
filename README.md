@@ -8,7 +8,7 @@ Ejercicios de fin de semana
 - [Ejercicios](#ejercicios)
   - ~~[1/ Listado de noticias](#1-listado-de-noticias)~~
   - ~~[2/ Marte, el planeta rojo](#2-marte-el-planeta-rojo)~~
-  - [3/ En el espacio nadie puede oir tus fetchs](#3-en-el-espacio-nadie-puede-oir-tus-fetchs)
+  - ~~[3/ En el espacio nadie puede oir tus fetchs](#3-en-el-espacio-nadie-puede-oir-tus-fetchs)~~
   - [4/ Ahora me ves...](#4-ahora-me-ves)
   - [5/ Todo es color entre tú y tus arrays...](#5-todo-es-color-entre-tú-y-tus-arrays)
   - [6/ Episodio VI: El retorno de las paletas](#6-episodio-vi-el-retorno-de-las-paletas)
